@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Popis gradova</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h2>Popis gradova</h2>
+  <a href="/gradovi/new" class="btn btn-primary">Dodaj</a>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Naziv države</th>
+      <th>Poštanski broj</th>
+      <th>Naziv grada</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="grad : ${listGradovi}">
+      <td th:text="${grad.idGrad}"></td>
+      <td th:text="${grad.drzava.nazivDrzave}"></td>
+      <td th:text="${grad.postanskiBroj}"></td>
+      <td th:text="${grad.nazivGrada}"></td>
+      <td>
+        <a th:href="@{/gradovi/edit/{id}(id=${grad.idGrad})}" class="btn btn-primary">Uredi</a>
+        <a th:href="@{/gradovi/delete/{id}(id=${grad.idGrad})}" class="btn btn-danger">Obriši</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="/" class="btn btn-secondary">Povratak</a>
+</div>
+</body>
+</html>

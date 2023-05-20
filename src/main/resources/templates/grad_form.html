@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Grad Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h2>Unos/uređivanje gradova</h2>
+
+
+  <form th:object="${grad}" th:action="@{/gradovi/save}" method="post">
+
+
+    <input type="hidden" th:field="*{idGrad}">
+
+    <div class="form-group">
+      <label for="postanskiBroj">Poštanski broj:</label>
+      <input type="text" class="form-control" id="postanskiBroj" th:field="*{postanskiBroj}">
+    </div>
+    <div class="form-group">
+      <label for="nazivGrada">Naziv grada:</label>
+      <input type="text" class="form-control" id="nazivGrada" th:field="*{nazivGrada}">
+    </div>
+
+
+<!--    <div class="form-group">    -->
+<!--      <label for="idDrzava">ID države:</label>-->
+<!--      <input type="text" class="form-control" id="idDrzava" th:field="*{drzava.idDrzava}">-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <label for="idDrzava">ID države:</label>-->
+<!--      <select class="form-control" id="idDrzava" th:field="*{drzava.idDrzava}">-->
+<!--        <option th:each="drzava : ${drzave}" th:value="${drzava.idDrzava}" th:text="${drzava.idDrzava}"></option>-->
+<!--      </select>-->
+<!--    </div>-->
+
+    <div class="form-group">
+      <label for="idDrzava">Država:</label>
+      <select class="form-control" id="idDrzava" th:field="*{drzava.idDrzava}">
+        <option th:each="drzava : ${drzave}" th:value="${drzava.idDrzava}" th:text="${drzava.nazivDrzave}"></option>
+      </select>
+    </div>
+
+
+<!--nepotrebno-->
+<!--    <div class="form-group">-->
+<!--      <label for="nazivDrzave">Naziv države:</label>-->
+<!--      <input type="text" class="form-control" id="nazivDrzave" th:field="*{drzava.nazivDrzave}" readonly>-->
+<!--    </div>-->
+
+    <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
+    <button type="submit" class="btn btn-primary" th:text="${grad.idGrad != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
+    <!-- Gumb za odustajanje -->
+    <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  function cancelForm() {
+    window.location = "[[@{/gradovi}]]";
+  }
+</script>
+</body>
+</html>

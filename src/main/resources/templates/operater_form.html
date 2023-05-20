@@ -1,0 +1,48 @@
+<!--idOperater-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Unos/uređivanje operatera</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h2>Unos/uređivanje operatera</h2>
+  <form th:action="@{/operateri/save}" method="post">
+
+    <input type="hidden" th:field="*{operater.idOperater}">
+
+    <div class="form-group">
+      <label for="ime">Ime:</label>
+      <input type="text" class="form-control" id="ime" name="ime" th:value="${operater != null ? operater.ime : ''}" required>
+    </div>
+    <div class="form-group">
+      <label for="prezime">Prezime:</label>
+      <input type="text" class="form-control" id="prezime" name="prezime" th:value="${operater != null ? operater.prezime : ''}" required>
+    </div>
+    <div class="form-group">
+      <label for="oib">OIB:</label>
+      <input type="text" class="form-control" id="oib" name="oib" th:value="${operater != null ? operater.oib : ''}" required>
+    </div>
+    <div class="form-group">
+      <label for="korisnickoIme">Korisničko ime:</label>
+      <input type="text" class="form-control" id="korisnickoIme" name="korisnickoIme" th:value="${operater != null ? operater.korisnickoIme : ''}" required>
+    </div>
+    <div class="form-group">
+      <label for="lozinka">Lozinka:</label>
+      <input type="password" class="form-control" id="lozinka" name="lozinka" th:value="${operater != null ? operater.lozinka : ''}" required>
+    </div>
+    <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
+    <button type="submit" class="btn btn-primary" th:text="${operater.idOperater != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
+    <!-- Gumb za odustajanje -->
+    <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function cancelForm() {
+    window.location = "[[@{/operateri}]]";
+  }
+</script>
+</body>
+</html>

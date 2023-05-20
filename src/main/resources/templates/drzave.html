@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Popis država</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Popis država</h2>
+    <a href="/drzave/new" class="btn btn-primary">Dodaj</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naziv države</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="drzava : ${listDrzave}">
+            <td th:text="${drzava.idDrzava}"></td>
+            <td th:text="${drzava.nazivDrzave}"></td>
+            <td>
+                <a th:href="@{/drzave/edit/{id}(id=${drzava.idDrzava})}" class="btn btn-primary">Uredi</a>
+                <a th:href="@{/drzave/delete/{id}(id=${drzava.idDrzava})}" class="btn btn-danger">Obriši</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/" class="btn btn-secondary">Povratak</a>
+</div>
+</body>
+</html>
