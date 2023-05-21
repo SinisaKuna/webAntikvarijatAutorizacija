@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OperaterRepository extends JpaRepository<Operater, Integer> {
-//    public Long countById(Integer id);
+    public Long countByIdOperater(Integer id);
 }

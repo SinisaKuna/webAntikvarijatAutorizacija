@@ -22,9 +22,9 @@ public class DrzavaController {
     public DrzavaController(DrzavaRepository drzavaRepository) {
         this.drzavaRepository = drzavaRepository;
     }
-
     @Autowired
     private DrzavaService drzavaService;
+
 
     @GetMapping("")
     public String showDrzaveList(Model model) {
@@ -36,7 +36,6 @@ public class DrzavaController {
     @GetMapping("/new")
     public String showNewForm(Model model) {
         model.addAttribute("drzava", new Drzava());
-        model.addAttribute("pageTitle", "Dodaj novu državu");
         return "drzava_form";
     }
 
@@ -51,7 +50,6 @@ public class DrzavaController {
         try {
             Drzava drzava = drzavaService.getDrzavaById(idDrzava);
             model.addAttribute("drzava", drzava);
-            model.addAttribute("pageTitle", "Uređivanje države (ID: " + idDrzava + ")");
             return "drzava_form";
         } catch (DrzavaNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
@@ -60,8 +58,18 @@ public class DrzavaController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteDrzava(@PathVariable int id) {
-        drzavaService.deleteDrzava(id);
+    public String deleteDrzava(@PathVariable int id, RedirectAttributes ra) {
+        try {
+            if (drzavaService.hasGrad(id) || drzavaService.hasAutor(id) ) {
+                ra.addFlashAttribute("message", "Nemoguće izbrisati državu jer postoje povezani zapisi u drugim tablicama.");
+            } else {
+                drzavaService.deleteDrzava(id);
+            }
+        } catch (DrzavaNotFoundException e) {
+            ra.addFlashAttribute("message", e.getMessage());
+        }
         return "redirect:/drzave";
     }
+
+
 }

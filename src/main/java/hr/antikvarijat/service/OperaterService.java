@@ -33,7 +33,7 @@ public class OperaterService {
 
     public void delete(Integer id) throws OperaterNotFoundException {
 
-        Long count = repo.count();
+        Long count = repo.countByIdOperater(id);
         if (count == null || count == 0) {
             throw new OperaterNotFoundException("Could not find any record with ID " + id);
         }

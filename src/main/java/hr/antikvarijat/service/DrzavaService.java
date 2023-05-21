@@ -1,5 +1,7 @@
 package hr.antikvarijat.service;
-
+import hr.antikvarijat.repository.AutorRepository;
+import hr.antikvarijat.repository.GradRepository;
+import hr.antikvarijat.service.GradService;
 import hr.antikvarijat.exception.DrzavaNotFoundException;
 import hr.antikvarijat.model.Drzava;
 import hr.antikvarijat.repository.DrzavaRepository;
@@ -19,9 +21,9 @@ public class DrzavaService {
         this.drzavaRepository = drzavaRepository;
     }
 
-//    public Drzava dohvatiDrzavu(int idDrzava) {
-//        return drzavaRepository.findById(idDrzava).orElse(null);
-//    }
+    @Autowired
+    private GradService gradService;
+
     public List<Drzava> getAllDrzave() {
         return drzavaRepository.findAll();
     }
@@ -42,4 +44,19 @@ public class DrzavaService {
     public void deleteDrzava(int id) {
         drzavaRepository.deleteById(id);
     }
+
+    @Autowired
+    private GradRepository gradRepository;
+
+    public boolean hasGrad(int drzavaId) {
+        return gradRepository.existsByDrzavaIdDrzava(drzavaId);
+    }
+
+    @Autowired
+    private AutorRepository autorRepository;
+
+    public boolean hasAutor(int autorId) {
+        return autorRepository.existsByDrzavaIdDrzava(autorId);
+    }
+
 }

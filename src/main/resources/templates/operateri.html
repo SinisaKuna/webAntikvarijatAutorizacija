@@ -1,39 +1,141 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
+  <meta charset="UTF-8">
   <title>Popis operatera</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+        /* Dodani stil za sidebar */
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <h2>Popis operatera</h2>
-  <a href="/operateri/new" class="btn btn-primary">Dodaj</a>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Ime</th>
-      <th>Prezime</th>
-      <th>OIB</th>
-      <th>Korisničko ime</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="operater : ${listOperateri}">
-      <td th:text="${operater.idOperater}"></td>
-      <td th:text="${operater.ime}"></td>
-      <td th:text="${operater.prezime}"></td>
-      <td th:text="${operater.oib}"></td>
-      <td th:text="${operater.korisnickoIme}"></td>
-      <td>
-        <a th:href="@{/operateri/edit/{id}(id=${operater.idOperater})}" class="btn btn-primary">Uredi</a>
-        <a th:href="@{/operateri/delete/{id}(id=${operater.idOperater})}" class="btn btn-danger">Obriši</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <a href="/" class="btn btn-secondary">Povratak</a>
+
+<div class="content">
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Antikvarijat knjiga</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Korisnik
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/profil">Profil</a>
+            <a class="dropdown-item" href="/operateri">Postavke</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/odjava">Odjava</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- SIDEBAR -->
+      <div class="col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="sidebar">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/drzave">Države</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/gradovi">Gradovi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/partneri">Partneri</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/izdavaci">Izdavači</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/autori">Autori</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/knjige">Knjige</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/prodaja">Prodaja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/okup">Otkup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/rezervacija">Rezervacija</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- TABLICA -->
+      <div class="col-md-9 col-xl-10">
+        <div class="container">
+          <h2>Popis operatera</h2>
+          <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
+          <a href="/operateri/new" class="btn btn-primary">Dodaj</a>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Ime</th>
+              <th>Prezime</th>
+              <th>OIB</th>
+              <th>Korisničko ime</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="operater : ${listOperateri}">
+              <td th:text="${operater.idOperater}"></td>
+              <td th:text="${operater.ime}"></td>
+              <td th:text="${operater.prezime}"></td>
+              <td th:text="${operater.oib}"></td>
+              <td th:text="${operater.korisnickoIme}"></td>
+              <td>
+                <a th:href="@{/operateri/edit/{id}(id=${operater.idOperater})}" class="btn btn-primary">Uredi</a>
+                <a th:href="@{/operateri/delete/{id}(id=${operater.idOperater})}" class="btn btn-danger">Obriši</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <a href="/" class="btn btn-secondary">Povratak</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

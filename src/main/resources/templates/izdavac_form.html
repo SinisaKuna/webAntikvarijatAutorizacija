@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Unos/uređivanje izdavača</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h2>Unos/uređivanje izdavača</h2>
+
+  <form th:object="${izdavac}" th:action="@{/izdavaci/save}" method="post">
+
+    <input type="hidden" th:field="*{idIzdavac}">
+
+    <div class="form-group">
+      <label for="nazivIzdavaca">Naziv izdavača:</label>
+      <input type="text" class="form-control" id="nazivIzdavaca" th:field="*{nazivIzdavaca}">
+    </div>
+
+    <div class="form-group">
+      <label for="idGrad">Grad:</label>
+      <select class="form-control" id="idGrad" th:field="*{grad.idGrad}">
+        <option th:each="grad : ${gradovi}" th:value="${grad.idGrad}" th:text="${grad.nazivGrada}"></option>
+      </select>
+    </div>
+
+    <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
+    <button type="submit" class="btn btn-primary" th:text="${izdavac.idIzdavac != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
+    <!-- Gumb za odustajanje -->
+    <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  function cancelForm() {
+    window.location = "[[@{/izdavaci}]]";
+  }
+</script>
+</body>
+</html>

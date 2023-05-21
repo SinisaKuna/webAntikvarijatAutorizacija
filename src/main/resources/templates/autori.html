@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Popis gradova</title>
+  <title>Popis autora</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
         /* Dodani stil za sidebar */
@@ -99,28 +99,26 @@
       <!-- TABLICA -->
       <div class="col-sm-9 col-md-10">
         <div class="container">
-          <h2>Popis gradova</h2>
+          <h2>Popis autora</h2>
           <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
-          <a href="/gradovi/new" class="btn btn-primary">Dodaj</a>
+          <a href="/autori/new" class="btn btn-primary">Dodaj</a>
           <table class="table table-striped">
             <thead>
             <tr>
               <th>ID</th>
+              <th>Naziv autora</th>
               <th>Naziv države</th>
-              <th>Poštanski broj</th>
-              <th>Naziv grada</th>
               <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="grad : ${listGradovi}">
-              <td th:text="${grad.idGrad}"></td>
-              <td th:text="${grad.drzava.nazivDrzave}"></td>
-              <td th:text="${grad.postanskiBroj}"></td>
-              <td th:text="${grad.nazivGrada}"></td>
+            <tr th:each="autor : ${listAutori}">
+              <td th:text="${autor.idAutor}"></td>
+              <td th:text="${autor.nazivAutora}"></td>
+              <td th:text="${autor.drzava.nazivDrzave}"></td>
               <td>
-                <a th:href="@{/gradovi/edit/{id}(id=${grad.idGrad})}" class="btn btn-primary">Uredi</a>
-                <a th:href="@{/gradovi/delete/{id}(id=${grad.idGrad})}" class="btn btn-danger">Obriši</a>
+                <a th:href="@{/autori/edit/{id}(id=${autor.idAutor})}" class="btn btn-primary">Uredi</a>
+                <a th:href="@{/autori/delete/{id}(id=${autor.idAutor})}" class="btn btn-danger">Obriši</a>
               </td>
             </tr>
             </tbody>

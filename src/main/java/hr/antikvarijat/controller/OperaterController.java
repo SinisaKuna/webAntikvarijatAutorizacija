@@ -37,7 +37,6 @@ public class OperaterController {
     @GetMapping("/new")
     public String showNewForm(Model model) {
         model.addAttribute("operater", new Operater());
-        model.addAttribute("pageTitle", "Dodaj novog operatera");
         return "operater_form";
     }
     @PostMapping("/save")
@@ -52,7 +51,6 @@ public class OperaterController {
         try {
             Operater operater = service.get(idOperater);
             model.addAttribute("operater", operater);
-            model.addAttribute("pageTitle", "Promjena operatera (ID: " + idOperater + ")");
             return "operater_form";
         } catch (OperaterNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());

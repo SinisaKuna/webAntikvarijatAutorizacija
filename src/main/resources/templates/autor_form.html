@@ -2,25 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Unos/uređivanje gradova</title>
+  <title>Unos/uređivanje autora</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-4">
-  <h2>Unos/uređivanje gradova</h2>
-
-  <form th:object="${grad}" th:action="@{/gradovi/save}" method="post">
+  <h2>Unos/uređivanje autora</h2>
 
 
-    <input type="hidden" th:field="*{idGrad}">
+  <form th:object="${autor}" th:action="@{/autori/save}" method="post">
+
+
+    <input type="hidden" th:field="*{idAutor}">
 
     <div class="form-group">
-      <label for="postanskiBroj">Poštanski broj:</label>
-      <input type="text" class="form-control" id="postanskiBroj" th:field="*{postanskiBroj}">
-    </div>
-    <div class="form-group">
-      <label for="nazivGrada">Naziv grada:</label>
-      <input type="text" class="form-control" id="nazivGrada" th:field="*{nazivGrada}">
+      <label for="nazivAutora">Naziv autora:</label>
+      <input type="text" class="form-control" id="nazivAutora" th:field="*{nazivAutora}">
     </div>
 
     <div class="form-group">
@@ -30,8 +27,9 @@
       </select>
     </div>
 
+
     <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
-    <button type="submit" class="btn btn-primary" th:text="${grad.idGrad != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
+    <button type="submit" class="btn btn-primary" th:text="${autor.idAutor != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
     <!-- Gumb za odustajanje -->
     <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
   </form>
@@ -43,7 +41,7 @@
 
 <script type="text/javascript">
   function cancelForm() {
-    window.location = "[[@{/gradovi}]]";
+    window.location = "[[@{/autori}]]";
   }
 </script>
 </body>

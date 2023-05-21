@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Antikvarijat knjiga</title>
+    <title>Popis izdavača</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         /* Dodani stil za sidebar */
@@ -96,7 +96,36 @@
                     </ul>
                 </div>
             </div>
-
+            <!-- TABLICA -->
+            <div class="col-sm-9 col-md-10">
+                <div class="container">
+                    <h2>Popis izdavača</h2>
+                    <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
+                    <a href="/izdavaci/new" class="btn btn-primary">Dodaj</a>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Naziv izdavača</th>
+                            <th>Grad</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="izdavac : ${listIzdavaci}">
+                            <td th:text="${izdavac.idIzdavac}"></td>
+                            <td th:text="${izdavac.nazivIzdavaca}"></td>
+                            <td th:text="${izdavac.grad.nazivGrada}"></td>
+                            <td>
+                                <a th:href="@{/izdavaci/edit/{id}(id=${izdavac.idIzdavac})}" class="btn btn-primary">Uredi</a>
+                                <a th:href="@{/izdavaci/delete/{id}(id=${izdavac.idIzdavac})}" class="btn btn-danger">Obriši</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="/" class="btn btn-secondary">Povratak</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

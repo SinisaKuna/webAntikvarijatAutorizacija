@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Antikvarijat knjiga</title>
+    <title>Popis knjiga</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         /* Dodani stil za sidebar */
@@ -96,7 +96,49 @@
                     </ul>
                 </div>
             </div>
-
+            <!-- TABLICA -->
+            <div class="col-sm-9 col-md-10">
+                <div class="container">
+                    <h2>Popis knjiga</h2>
+                    <!-- Provjera poruke o grešci -->
+                    <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
+                    <!-- Dodavanje nove knjige -->
+                    <a href="/knjige/new" class="btn btn-primary">Dodaj</a>
+                    <!-- Tablica knjiga -->
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Naziv knjige</th>
+                            <th>Autor</th>
+                            <th>Izdavač</th>
+                            <th>Godina izdanja</th>
+                            <th>Prodajna cijena</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Iteriranje kroz popis knjiga -->
+                        <tr th:each="knjiga : ${listKnjige}">
+                            <td th:text="${knjiga.idKnjiga}"></td>
+                            <td th:text="${knjiga.nazivKnjige}"></td>
+                            <td th:text="${knjiga.autor.nazivAutora}"></td>
+                            <td th:text="${knjiga.izdavac.nazivIzdavaca}"></td>
+                            <td th:text="${knjiga.godinaIzdanja}"></td>
+                            <td th:text="${knjiga.cijenaProdaje}"></td>
+                            <td>
+                                <!-- Uređivanje knjige -->
+                                <a th:href="@{/knjige/edit/{id}(id=${knjiga.idKnjiga})}" class="btn btn-primary">Uredi</a>
+                                <!-- Brisanje knjige -->
+                                <a th:href="@{/knjige/delete/{id}(id=${knjiga.idKnjiga})}" class="btn btn-danger">Obriši</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- Povratak na početnu stranicu -->
+                    <a href="/" class="btn btn-secondary">Povratak</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -104,5 +146,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+</title>
+</head>
+<body>
+
 </body>
 </html>
