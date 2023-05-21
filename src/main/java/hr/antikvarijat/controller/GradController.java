@@ -87,7 +87,7 @@ public class GradController {
     @GetMapping("/delete/{id}")
     public String deleteGrad(@PathVariable int id, RedirectAttributes ra) {
         try {
-            if (gradService.hasIzdavac(id) ) {
+            if (gradService.hasIzdavac(id) || gradService.hasPartner(id) ) {
                 ra.addFlashAttribute("message", "Nemoguće izbrisati grad jer postoje povezani zapisi u drugim tablicama.");
             } else {
                 gradService.deleteGrad(id);

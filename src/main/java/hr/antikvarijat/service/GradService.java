@@ -4,6 +4,7 @@ import hr.antikvarijat.exception.GradNotFoundException;
 import hr.antikvarijat.model.Grad;
 import hr.antikvarijat.repository.GradRepository;
 import hr.antikvarijat.repository.IzdavacRepository;
+import hr.antikvarijat.repository.PartnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,12 @@ public class GradService {
 
     public boolean hasIzdavac(int izdavacId) {
         return izdavacRepository.existsByGradIdGrad(izdavacId);
+    }
+
+    @Autowired
+    private PartnerRepository partnerRepository;
+
+    public boolean hasPartner(int partnerId) {
+        return partnerRepository.existsByGradIdGrad(partnerId);
     }
 }

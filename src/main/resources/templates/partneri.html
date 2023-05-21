@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Popis gradova</title>
+  <title>Popis partnera</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
         /* Dodani stil za sidebar */
@@ -33,8 +33,7 @@
 
 <div class="content">
 
-
-
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Antikvarijat knjiga</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -59,10 +58,10 @@
     </div>
   </nav>
 
-
+  <!-- Container -->
   <div class="container-fluid">
     <div class="row">
-      <!-- SIDEBAR -->
+      <!-- Sidebar -->
       <div class="col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
         <div class="sidebar">
           <ul class="nav flex-column">
@@ -99,31 +98,36 @@
           </ul>
         </div>
       </div>
-      <!-- TABLICA -->
+
+      <!-- Tablica -->
       <div class="col-sm-9 col-md-10">
         <div class="container">
-          <h2>Popis gradova</h2>
+          <h2>Popis partnera</h2>
           <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
-          <a href="/gradovi/new" class="btn btn-primary">Dodaj</a>
+          <a href="/partneri/new" class="btn btn-primary">Dodaj</a>
           <table class="table table-striped">
             <thead>
             <tr>
               <th>ID</th>
-              <th>Naziv države</th>
-              <th>Poštanski broj</th>
-              <th>Naziv grada</th>
+              <th>Naziv partnera</th>
+              <th>Ulica i broj</th>
+              <th>Grad</th>
+              <th>Mail</th>
               <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="grad : ${listGradovi}">
-              <td th:text="${grad.idGrad}"></td>
-              <td th:text="${grad.drzava.nazivDrzave}"></td>
-              <td th:text="${grad.postanskiBroj}"></td>
-              <td th:text="${grad.nazivGrada}"></td>
+            <tr th:each="partner : ${listPartneri}">
+              <td th:text="${partner.idPartner}"></td>
+              <td th:text="${partner.nazivPartnera}"></td>
+              <td th:text="${partner.ulicaBroj}"></td>
+              <td th:text="${partner.grad.nazivGrada}"></td>
+              <td th:text="${partner.email}"></td>
               <td>
-                <a th:href="@{/gradovi/edit/{id}(id=${grad.idGrad})}" class="btn btn-primary">Uredi</a>
-                <a th:href="@{/gradovi/delete/{id}(id=${grad.idGrad})}" class="btn btn-danger">Obriši</a>
+                <a th:href="@{/partneri/edit/{id}(id=${partner.idPartner})}"
+                   class="btn btn-primary">Uredi</a>
+                <a th:href="@{/partneri/delete/{id}(id=${partner.idPartner})}"
+                   class="btn btn-danger">Obriši</a>
               </td>
             </tr>
             </tbody>

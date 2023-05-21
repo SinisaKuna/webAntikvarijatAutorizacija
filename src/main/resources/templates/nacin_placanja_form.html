@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Unos/uređivanje načina plaćanja</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h2>Unos/uređivanje načina plaćanja</h2>
+  <form th:action="@{/nacini_placanja/save}" method="post">
+
+    <input type="hidden" th:field="*{nacinPlacanja.idNacinPlacanja}">
+
+    <div class="form-group">
+      <label for="nazivNacinaPlacanja">Naziv načina plaćanja:</label>
+      <input type="text" class="form-control" id="nazivNacinaPlacanja" name="nazivNacinaPlacanja"
+             th:value="${nacinPlacanja != null ? nacinPlacanja.nazivNacinaPlacanja : ''}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="oznakaNacinaPlacanja">Oznaka:</label>
+      <input type="text" class="form-control" id="oznakaNacinaPlacanja" name="oznakaNacinaPlacanja"
+             th:value="${nacinPlacanja != null ? nacinPlacanja.oznakaNacinaPlacanja : ''}" required>
+    </div>
+
+    <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
+    <button type="submit" class="btn btn-primary"
+            th:text="${nacinPlacanja.idNacinPlacanja != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
+    <!-- Gumb za odustajanje -->
+    <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
+  </form>
+</div>
+
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/nacin_placanja}]]";
+    }
+</script>
+</body>
+</html>
