@@ -1,7 +1,6 @@
 package hr.antikvarijat.controller;
 
 import hr.antikvarijat.exception.AutorNotFoundException;
-import hr.antikvarijat.exception.DrzavaNotFoundException;
 import hr.antikvarijat.model.Autor;
 import hr.antikvarijat.model.Drzava;
 import hr.antikvarijat.service.AutorService;

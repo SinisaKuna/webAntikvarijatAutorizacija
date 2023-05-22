@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Unos/uređivanje načina plaćanja</title>
@@ -8,7 +8,7 @@
 <body>
 <div class="container">
   <h2>Unos/uređivanje načina plaćanja</h2>
-  <form th:action="@{/nacini_placanja/save}" method="post">
+  <form th:object="${nacin_placanja}" th:action="@{/nacini_placanja/save}" method="post">
 
     <input type="hidden" th:field="*{nacinPlacanja.idNacinPlacanja}">
 
