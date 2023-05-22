@@ -14,14 +14,11 @@
 
     <div class="form-group">
       <label for="nazivNacinaPlacanja">Naziv načina plaćanja:</label>
-      <input type="text" class="form-control" id="nazivNacinaPlacanja" name="nazivNacinaPlacanja"
-             th:value="${nacinPlacanja != null ? nazivNacinaPlacanja : ''}" required>
+      <input type="text" class="form-control" id="nazivNacinaPlacanja" th:field="*{nazivNacinaPlacanja}">
     </div>
-
     <div class="form-group">
-      <label for="oznakaNacinaPlacanja">Oznaka:</label>
-      <input type="text" class="form-control" id="oznakaNacinaPlacanja" name="oznakaNacinaPlacanja"
-             th:value="${nacinPlacanja != null ? oznakaNacinaPlacanja : ''}" required>
+      <label for="oznakaNacinaPlacanja">Oznaka::</label>
+      <input type="text" class="form-control" id="oznakaNacinaPlacanja" th:field="*{oznakaNacinaPlacanja}">
     </div>
 
     <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
