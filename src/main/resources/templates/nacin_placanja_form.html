@@ -8,20 +8,20 @@
 <body>
 <div class="container">
   <h2>Unos/uređivanje načina plaćanja</h2>
-  <form th:object="${nacin_placanja}" th:action="@{/nacini_placanja/save}" method="post">
+  <form th:object="${nacinPlacanja}" th:action="@{/nacini_placanja/save}" method="post">
 
-    <input type="hidden" th:field="*{nacinPlacanja.idNacinPlacanja}">
+    <input type="hidden" th:field="*{idNacinPlacanja}">
 
     <div class="form-group">
       <label for="nazivNacinaPlacanja">Naziv načina plaćanja:</label>
       <input type="text" class="form-control" id="nazivNacinaPlacanja" name="nazivNacinaPlacanja"
-             th:value="${nacinPlacanja != null ? nacinPlacanja.nazivNacinaPlacanja : ''}" required>
+             th:value="${nacinPlacanja != null ? nazivNacinaPlacanja : ''}" required>
     </div>
 
     <div class="form-group">
       <label for="oznakaNacinaPlacanja">Oznaka:</label>
       <input type="text" class="form-control" id="oznakaNacinaPlacanja" name="oznakaNacinaPlacanja"
-             th:value="${nacinPlacanja != null ? nacinPlacanja.oznakaNacinaPlacanja : ''}" required>
+             th:value="${nacinPlacanja != null ? oznakaNacinaPlacanja : ''}" required>
     </div>
 
     <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
