@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Unos/uređivanje prodaja zaglavlja</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h2>Unos/uređivanje prodaja zaglavlja</h2>
+
+  <form th:object="${prodajaZaglavlje}" th:action="@{/prodaja_zaglavlja/save}" method="post">
+
+    <input type="hidden" th:field="*{idProdajaZaglavlje}">
+
+    <div class="form-group">
+      <label for="datumProdaje">Datum:</label>
+      <input type="date" class="form-control" id="datumProdaje" th:field="*{datumProdaje}">
+    </div>
+
+
+
+<!--OVO JE OK-->
+    <div class="form-group">
+      <label for="idPartner">Partner:</label>
+      <select class="form-control" id="idPartner" th:field="*{partner.idPartner}">
+        <option th:each="partner : ${partner}" th:value="${partner.idPartner}" th:text="${partner.nazivPartnera}"></option>
+      </select>
+    </div>
+
+
+
+
+
+
+
+    <div class="form-group">
+      <label for="idNacinPlacanja">Način plaćanja:</label>
+      <select class="form-control" id="idNacinPlacanja" th:field="*{nacinPlacanja.idNacinPlacanja}">
+        <option th:each="nacinPlacanja : ${nacinPlacanja}" th:value="${nacinPlacanja.idNacinPlacanja}" th:text="${nacinPlacanja.nazivNacinaPlacanja}"></option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="idOperater">Operater:</label>
+      <select class="form-control" id="idOperater" th:field="*{operater.idOperater}">
+        <option th:each="operater : ${operater}" th:value="${operater.idOperater}" th:text="${operater.imePrezime}"></option>
+      </select>
+    </div>
+
+    <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
+    <button type="submit" class="btn btn-primary" th:text="${prodajaZaglavlje.idProdajaZaglavlje != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
+    <!-- Gumb za odustajanje -->
+    <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  function cancelForm() {
+    window.location = "[[@{/prodaja_zaglavlja}]]";
+  }
+</script>
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>

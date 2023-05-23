@@ -35,7 +35,6 @@ public class PartnerController {
 
     @GetMapping("/new")
     public String showForm(Model model) {
-        Grad grad = new Grad();
         List<Grad> listaGradova = gradService.getAllGradovi();
         Partner partner = new Partner();
         model.addAttribute("partner", partner);

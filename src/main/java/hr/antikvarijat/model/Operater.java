@@ -27,6 +27,8 @@ public class Operater {
     @Column(name = "lozinka")
     private String lozinka;
 
+    private String imePrezime;
+
     // konstruktor, getteri i setteri
 
     public Operater() {
@@ -63,6 +65,13 @@ public class Operater {
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }
+
+    public String getImePrezime() {  return ime + " " + prezime; }
+
+    public void setImePrezime(String prezime) {
+        this.imePrezime = ime + " " + prezime;
+    }
+
 
     public String getOib() {
         return oib;

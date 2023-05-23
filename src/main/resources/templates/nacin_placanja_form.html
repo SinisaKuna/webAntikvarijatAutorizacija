@@ -16,14 +16,22 @@
       <label for="nazivNacinaPlacanja">Naziv načina plaćanja:</label>
       <input type="text" class="form-control" id="nazivNacinaPlacanja" th:field="*{nazivNacinaPlacanja}">
     </div>
+<!--    <div class="form-group">-->
+<!--      <label for="oznakaNacinaPlacanja">Oznaka::</label>-->
+<!--      <input type="text" class="form-control" id="oznakaNacinaPlacanja" th:field="*{oznakaNacinaPlacanja}">-->
+<!--    </div>-->
     <div class="form-group">
-      <label for="oznakaNacinaPlacanja">Oznaka::</label>
-      <input type="text" class="form-control" id="oznakaNacinaPlacanja" th:field="*{oznakaNacinaPlacanja}">
+      <label for="oznakaNacinaPlacanja">Oznaka:</label>
+      <select class="form-control" id="oznakaNacinaPlacanja" th:field="*{oznakaNacinaPlacanja}">
+        <option value="G">G</option>
+        <option value="K">K</option>
+        <option value="C">C</option>
+        <option value="O">O</option>
+      </select>
     </div>
 
     <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
-    <button type="submit" class="btn btn-primary"
-            th:text="${nacinPlacanja.idNacinPlacanja != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
+    <button type="submit" class="btn btn-primary"  th:text="${nacinPlacanja.idNacinPlacanja != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
     <!-- Gumb za odustajanje -->
     <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
   </form>

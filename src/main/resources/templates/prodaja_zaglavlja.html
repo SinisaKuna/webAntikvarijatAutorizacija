@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Popis načina plaćanja</title>
+      <title>Popis prodaja zaglavlja</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
         /* Dodani stil za sidebar */
@@ -32,9 +32,6 @@
 <body>
 
 <div class="content">
-
-
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Antikvarijat knjiga</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -58,7 +55,6 @@
       </ul>
     </div>
   </nav>
-
 
   <div class="container-fluid">
     <div class="row">
@@ -100,34 +96,52 @@
         </div>
       </div>
       <!-- TABLICA -->
-      <div class="container">
-        <h2>Popis načina plaćanja</h2>
-        <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
-        <a href="/nacini_placanja/new" class="btn btn-primary">Dodaj</a>
-        <table class="table table-striped table-hover">
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th>Naziv načina plaćanja</th>
-            <th>Oznaka</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="nacinPlacanja : ${listNacinPlacanja}">
-            <td th:text="${nacinPlacanja.idNacinPlacanja}"></td>
-            <td th:text="${nacinPlacanja.nazivNacinaPlacanja}"></td>
-            <td th:text="${nacinPlacanja.oznakaNacinaPlacanja}"></td>
-            <td>
-              <a th:href="@{/nacini_placanja/edit/{id}(id=${nacinPlacanja.idNacinPlacanja})}"
-                 class="btn btn-primary">Uredi</a>
-              <a th:href="@{/nacini_placanja/delete/{id}(id=${nacinPlacanja.idNacinPlacanja})}"
-                 class="btn btn-danger">Obriši</a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-        <a href="/" class="btn btn-secondary">Povratak</a>
+      <div class="col-sm-9 col-md-10">
+        <div class="container">
+          <h2>Popis prodaja zaglavlja</h2>
+          <!-- Provjera poruke o grešci -->
+          <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
+          <!-- Dodavanje novog prodaja zaglavlja -->
+          <a href="/prodaja_zaglavlja/new" class="btn btn-primary">Dodaj</a>
+          <!-- Tablica prodaja zaglavlja -->
+          <!-- Tablica prodaja zaglavlja -->
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Datum</th>
+              <th>Partner</th>
+              <th>Nacin placanja</th>
+              <th>Operater</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iteriranje kroz popis prodaja zaglavlja -->
+            <tr th:each="prodajaZaglavlje : ${listaProdajaZaglavlja}">
+              <td th:text="${prodajaZaglavlje.idProdajaZaglavlje}"></td>
+              <td th:text="${prodajaZaglavlje.datumProdaje}"></td>
+
+              <td th:text="${prodajaZaglavlje.partner != null ? prodajaZaglavlje.partner.nazivPartnera : ''}"></td>
+              <td th:text="${prodajaZaglavlje.nacinPlacanja != null ? prodajaZaglavlje.nacinPlacanja.nazivNacinaPlacanja : ''}"></td>
+              <td th:text="${prodajaZaglavlje.operater != null ? prodajaZaglavlje.operater.imePrezime : ''}"></td>
+
+
+
+              <td>
+                <!-- Uređivanje prodaja zaglavlja -->
+                <a th:href="@{/prodaja_zaglavlja/edit/{id}(id=${prodajaZaglavlje.idProdajaZaglavlje})}"
+                   class="btn btn-primary">Uredi</a>
+                <!-- Brisanje prodaja zaglavlja -->
+                <a th:href="@{/prodaja_zaglavlja/delete/{id}(id=${prodajaZaglavlje.idProdajaZaglavlje})}"
+                   class="btn btn-danger">Obriši</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- Povratak na početnu stranicu -->
+          <a href="/" class="btn btn-secondary">Povratak</a>
+        </div>
       </div>
     </div>
   </div>
@@ -136,5 +150,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+</title>
+</head>
+<body>
+
 </body>
 </html>
