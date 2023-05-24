@@ -14,7 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -46,8 +47,16 @@ public class ProdajaZaglavljeController {
     @GetMapping("/new")
     public String showForm(Model model) {
         ProdajaZaglavlje prodajaZaglavlje = new ProdajaZaglavlje();
+
+        Calendar calendar = Calendar.getInstance();
+        java.util.Date danasnjiDatum = calendar.getTime();
+
+        // Pretvori java.util.Date u java.sql.Date
+        Date danas = new Date(danasnjiDatum.getTime());
+
+        prodajaZaglavlje.setDatumProdaje(danas);
+
         List<Partner> listaPartnera = partnerService.getAllPartners();
-//        listaPartnera.add(0, null);
         List<NacinPlacanja> listaNacinaPlacanja = nacinPlacanjaService.getAllNacinPlacanja();
         List<Operater> listaOperatera = operaterService.listAll();
 
