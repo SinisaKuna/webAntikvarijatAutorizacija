@@ -4,7 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
-  <title>Popis autora</title>
+  <title>Popis knjiga</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
@@ -100,35 +100,52 @@
           </ul>
         </div>
       </div>
+
+
       <!-- TABLICA -->
       <div class="col-sm-9 col-md-10">
         <div class="container">
-          <h3>Popis autora</h3>
+          <h3>Popis knjiga</h3>
+          <!-- Provjera poruke o grešci -->
           <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
-          <a href="/autori/new" class="btn btn-primary">Dodaj</a>
+          <!-- Dodavanje nove knjige -->
+          <a href="/knjige/new" class="btn btn-primary">Dodaj</a>
+          <!-- Tablica knjiga -->
           <div class="table-responsive">
             <table class="table table-striped table-hover">
               <thead>
               <tr>
                 <th>ID</th>
-                <th>Naziv autora</th>
-                <th>Naziv države</th>
+                <th>Naziv knjige</th>
+                <th>Autor</th>
+                <th>Izdavač</th>
+                <th>Godina izdanja</th>
+                <th>Prodajna cijena</th>
                 <th></th>
               </tr>
               </thead>
               <tbody>
-              <tr th:each="autor : ${listAutori}">
-                <td th:text="${autor.idAutor}"></td>
-                <td th:text="${autor.nazivAutora}"></td>
-                <td th:text="${autor.drzava.nazivDrzave}"></td>
+              <!-- Iteriranje kroz popis knjiga -->
+              <tr th:each="knjiga : ${listKnjige}">
+                <td th:text="${knjiga.idKnjiga}"></td>
+                <td th:text="${knjiga.nazivKnjige}"></td>
+                <td th:text="${knjiga.autor.nazivAutora}"></td>
+                <td th:text="${knjiga.izdavac.nazivIzdavaca}"></td>
+                <td th:text="${knjiga.godinaIzdanja}"></td>
+                <td th:text="${knjiga.cijenaProdaje}"></td>
                 <td>
-                  <a th:href="@{/autori/edit/{id}(id=${autor.idAutor})}" class="btn btn-primary">Uredi</a>
-                  <a th:href="@{/autori/delete/{id}(id=${autor.idAutor})}" class="btn btn-danger">Obriši</a>
+                  <!-- Uređivanje knjige -->
+                  <a th:href="@{/knjige/edit/{id}(id=${knjiga.idKnjiga})}"
+                     class="btn btn-primary">Uredi</a>
+                  <!-- Brisanje knjige -->
+                  <a th:href="@{/knjige/delete/{id}(id=${knjiga.idKnjiga})}"
+                     class="btn btn-danger">Obriši</a>
                 </td>
               </tr>
               </tbody>
             </table>
           </div>
+          <!-- Povratak na početnu stranicu -->
           <a href="/" class="btn btn-secondary">Povratak</a>
         </div>
       </div>
