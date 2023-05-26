@@ -22,4 +22,8 @@ public class MainController {
     public String showOdjava() {
         return "index";
     }
+
+    @GetMapping("/antikvarijat")
+    public String antikvarijat(){ return "antikvarijat"; }
+
 }
