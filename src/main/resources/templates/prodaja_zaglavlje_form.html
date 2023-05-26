@@ -21,17 +21,13 @@
 
 
 <!--OVO JE OK-->
+
     <div class="form-group">
       <label for="idPartner">Partner:</label>
       <select class="form-control" id="idPartner" th:field="*{partner.idPartner}">
         <option th:each="partner : ${partner}" th:value="${partner.idPartner}" th:text="${partner.nazivPartnera}"></option>
       </select>
     </div>
-
-
-
-
-
 
 
     <div class="form-group">
@@ -41,12 +37,12 @@
       </select>
     </div>
 
-    <div class="form-group">
-      <label for="idOperater">Operater:</label>
-      <select class="form-control" id="idOperater" th:field="*{operater.idOperater}">
-        <option th:each="operater : ${operater}" th:value="${operater.idOperater}" th:text="${operater.imePrezime}"></option>
-      </select>
-    </div>
+<!--    <div class="form-group">-->
+<!--      <label for="id">Operater:</label>-->
+<!--      <select class="form-control" id="id" th:field="*{user.id}">-->
+<!--        <option th:each="user : ${user}" th:value="${user.id}" th:text="${user.email}"></option>-->
+<!--      </select>-->
+<!--    </div>-->
 
     <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
     <button type="submit" class="btn btn-primary" th:text="${prodajaZaglavlje.idProdajaZaglavlje != 0 ? 'Ažuriraj' : 'Spremi'}"></button>

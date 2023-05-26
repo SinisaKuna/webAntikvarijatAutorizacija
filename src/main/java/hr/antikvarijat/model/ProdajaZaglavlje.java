@@ -1,5 +1,6 @@
 package hr.antikvarijat.model;
 
+import hr.antikvarijat.entity.User;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -34,8 +35,8 @@ public class ProdajaZaglavlje {
     private NacinPlacanja nacinPlacanja;
 
     @ManyToOne
-    @JoinColumn(name = "id_operater")
-    private Operater operater;
+    @JoinColumn(name = "id")
+    private User user;
 
     public ProdajaZaglavlje() {
         // prazan konstruktor potreban za JPA
@@ -43,14 +44,14 @@ public class ProdajaZaglavlje {
 
     // Konstruktor bez ID-a
     public ProdajaZaglavlje(String brojProdaje, Date datumProdaje, Partner partner, String zki, String jir,
-                            NacinPlacanja nacinPlacanja, Operater operater) {
+                            NacinPlacanja nacinPlacanja, User user) {
         this.brojProdaje = brojProdaje;
         this.datumProdaje = datumProdaje;
         this.partner = partner;
         this.zki = zki;
         this.jir = jir;
         this.nacinPlacanja = nacinPlacanja;
-        this.operater = operater;
+        this.user = user;
     }
 
     // Getteri i setteri
@@ -111,11 +112,11 @@ public class ProdajaZaglavlje {
         this.nacinPlacanja = nacinPlacanja;
     }
 
-    public Operater getOperater() {
-        return operater;
+    public User getUser() {
+        return user;
     }
 
-    public void setOperater(Operater operater) {
-        this.operater = operater;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

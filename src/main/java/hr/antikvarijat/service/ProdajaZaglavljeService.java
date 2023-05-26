@@ -2,7 +2,9 @@ package hr.antikvarijat.service;
 
 import hr.antikvarijat.exception.ProdajaZaglavljeNotFoundException;
 import hr.antikvarijat.model.ProdajaZaglavlje;
+import hr.antikvarijat.repository.PartnerRepository;
 import hr.antikvarijat.repository.ProdajaZaglavljeRepository;
+import hr.antikvarijat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,14 @@ import java.util.Optional;
 public class ProdajaZaglavljeService {
 
     private final ProdajaZaglavljeRepository prodajaZaglavljeRepository;
+    private final UserRepository userRepository;
+    public final PartnerRepository partnerRepository;
 
     @Autowired
-    public ProdajaZaglavljeService(ProdajaZaglavljeRepository prodajaZaglavljeRepository) {
+    public ProdajaZaglavljeService(ProdajaZaglavljeRepository prodajaZaglavljeRepository, UserRepository userRepository, PartnerRepository partnerRepository) {
         this.prodajaZaglavljeRepository = prodajaZaglavljeRepository;
+        this.userRepository = userRepository;
+        this.partnerRepository = partnerRepository;
     }
 
     public List<ProdajaZaglavlje> getAllProdajaZaglavlje() {
@@ -33,9 +39,24 @@ public class ProdajaZaglavljeService {
     }
 
     public ProdajaZaglavlje saveProdajaZaglavlje(ProdajaZaglavlje prodajaZaglavlje) {
-         if (prodajaZaglavlje.getPartner().getIdPartner() == 0) {
-            prodajaZaglavlje.setPartner(null);
-        }
+
+//        if (prodajaZaglavlje.getPartner() == null) {
+//            Partner partner = new Partner();
+//            partner.setIdPartner(0);
+//            //partnerRepository.save(partner);
+//            prodajaZaglavlje.setPartner(partner);
+//        }
+//        if (prodajaZaglavlje.getOperater() == null) {
+//            User operater = new User();
+//            operater.setIdOperater(0);
+//            //operaterRepository.save(operater);
+//            prodajaZaglavlje.setOperater(operater);
+//        }
+//        if (prodajaZaglavlje.getNacinPlacanja() == null) {
+//            NacinPlacanja np = new NacinPlacanja();
+//            np.setIdNacinPlacanja(0);
+//            prodajaZaglavlje.setNacinPlacanja(np);
+//        }
         return prodajaZaglavljeRepository.save(prodajaZaglavlje);
     }
 

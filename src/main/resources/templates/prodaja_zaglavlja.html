@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
       <title>Popis prodaja zaglavlja</title>
@@ -32,6 +34,7 @@
 <body>
 
 <div class="content">
+  <!--  NAVBAR-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Antikvarijat knjiga</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -43,18 +46,18 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Korisnik
+            <span sec:authentication="name">not found</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/profil">Profil</a>
-            <a class="dropdown-item" href="/operateri">Postavke</a>
+            <a class="dropdown-item" href="/users">Operateri</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/odjava">Odjava</a>
+            <a class="dropdown-item" href="/logout">Odjava</a>
           </div>
         </li>
       </ul>
     </div>
   </nav>
+
 
   <div class="container-fluid">
     <div class="row">
@@ -87,7 +90,7 @@
               <a class="nav-link" href="/prodaja_zaglavlja">Prodaja</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/okup">Otkup</a>
+              <a class="nav-link" href="/otkup">Otkup</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/rezervacija">Rezervacija</a>
@@ -95,10 +98,16 @@
           </ul>
         </div>
       </div>
+
+<!--      <tr th:each="prodajaZaglavlje : ${listaProdajaZaglavlja}">-->
+<!--        <div th:text="${prodajaZaglavlje.user}"></div>-->
+<!--      </div>-->
+
+
       <!-- TABLICA -->
       <div class="col-sm-9 col-md-10">
         <div class="container">
-          <h2>Popis prodaja zaglavlja</h2>
+          <h3>Popis prodaja zaglavlja</h3>
           <!-- Provjera poruke o grešci -->
           <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
           <!-- Dodavanje novog prodaja zaglavlja -->
@@ -121,10 +130,12 @@
             <tr th:each="prodajaZaglavlje : ${listaProdajaZaglavlja}">
               <td th:text="${prodajaZaglavlje.idProdajaZaglavlje}"></td>
               <td th:text="${prodajaZaglavlje.datumProdaje}"></td>
-
               <td th:text="${prodajaZaglavlje.partner != null ? prodajaZaglavlje.partner.nazivPartnera : ''}"></td>
               <td th:text="${prodajaZaglavlje.nacinPlacanja != null ? prodajaZaglavlje.nacinPlacanja.nazivNacinaPlacanja : ''}"></td>
-              <td th:text="${prodajaZaglavlje.operater != null ? prodajaZaglavlje.operater.imePrezime : ''}"></td>
+              <td th:text="${prodajaZaglavlje.user.name}"></td>
+
+<!--              <td th:text="${prodajaZaglavlje.user != null ? prodajaZaglavlje.user.email : ''}"></td>-->
+
 
 
 
@@ -154,6 +165,11 @@
 </html>
 </title>
 </head>
+
+
+
+
+
 <body>
 
 </body>

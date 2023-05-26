@@ -9,18 +9,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class MainController {
 
-    @GetMapping("")
+    @GetMapping("/")
     public String showHomePage() {
-        return "index";
+        return "antikvarijat";
     }
-    @GetMapping("/profil")
-    public String showProfil() {
-        return "index";
+
+    @GetMapping("/otkup")
+    public String showNoOtkup() { return "redirect:antikvarijat"; }
+
+    @GetMapping("/rezervacija")
+    public String showNoRezervacija() { return "redirect:antikvarijat"; }
+
+    @GetMapping("/operateri")
+    public String showUsers() {
+        return "redirect:/users";
     }
 
     @GetMapping("/odjava")
     public String showOdjava() {
-        return "index";
+        return "redirect:/logout";
     }
 
     @GetMapping("/antikvarijat")

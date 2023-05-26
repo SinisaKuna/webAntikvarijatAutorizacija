@@ -59,6 +59,21 @@
                            th:if="${#fields.hasErrors('lastName')}">
                         </p>
                     </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">OIB</label>
+                        <input class="form-control"
+                               id="oib"
+                               name="oib"
+                               placeholder="Unesite OIB"
+                               th:field="*{oib}"
+                               type="text"
+                        />
+                        <p th:errors="*{lastName}" class="text-danger"
+                           th:if="${#fields.hasErrors('oib')}">
+                        </p>
+                    </div>
+
                     <div class="form-group mb-3">
                         <label class="form-label">Email</label>
                         <input class="form-control"
@@ -72,6 +87,7 @@
                            th:if="${#fields.hasErrors('email')}">
                         </p>
                     </div>
+
                     <div class="form-group mb-3">
                         <label class="form-label">Lozinka</label>
                         <input class="form-control"
@@ -88,8 +104,8 @@
 
                     <div class="form-group mb-3">
                         <button class="btn btn-primary" type="submit">Registriraj se</button>
-                        <span>Već ste registrirani? <a href="/" th:href="@{/login}">Prijavite se
-                             ovdje</a></span>
+                        <span>Već ste registrirani? <a href="/" th:href="@{/login}">Prijavite se ovdje</a></span>
+                        <span> ili  <a href="/" th:href="@{/}">Odustanite</a></span>
                     </div>
                 </form>
             </div>

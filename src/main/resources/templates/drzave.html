@@ -34,6 +34,7 @@
 <body>
 
 <div class="content">
+    <!--  NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Antikvarijat knjiga</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -45,13 +46,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Korisnik
+                        <span sec:authentication="name">not found</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/profil">Profil</a>
-                        <a class="dropdown-item" href="/operateri">Postavke</a>
+                        <a class="dropdown-item" href="/users">Operateri</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/odjava">Odjava</a>
+                        <a class="dropdown-item" href="/logout">Odjava</a>
                     </div>
                 </li>
             </ul>
@@ -90,7 +90,7 @@
                             <a class="nav-link" href="/prodaja_zaglavlja">Prodaja</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/okup">Otkup</a>
+                            <a class="nav-link" href="/otkup">Otkup</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/rezervacija">Rezervacija</a>
@@ -101,7 +101,7 @@
             <!-- TABLICA -->
             <div class="col-sm-9 col-md-10">
                 <div class="container">
-                    <h2>Popis država</h2>
+                    <h3>Popis država</h3>
                     <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
                     <a href="/drzave/new" class="btn btn-primary">Dodaj</a>
                     <table class="table table-striped table-hover">
