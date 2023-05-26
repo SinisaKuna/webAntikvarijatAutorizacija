@@ -43,13 +43,17 @@ public class Knjiga {
     @Column(name = "cijena_prodaje")
     private BigDecimal cijenaProdaje;
 
+    private String nazivAutora;
+    private String nazivIzdavaca;
+
+
     // konstruktor, getteri i setteri
 
     public Knjiga() {
     }
 
     public Knjiga(String nazivKnjige, Autor autor, String godinaIzdanja, Izdavac izdavac, String jezik,
-                  int brojStranica, String vrstaUveza, String dimenzija, BigDecimal cijenaProdaje) {
+                  int brojStranica, String vrstaUveza, String dimenzija, BigDecimal cijenaProdaje, String nazivAutora, String nazivIzdavaca) {
         this.nazivKnjige = nazivKnjige;
         this.autor = autor;
         this.godinaIzdanja = godinaIzdanja;
@@ -59,6 +63,8 @@ public class Knjiga {
         this.vrstaUveza = vrstaUveza;
         this.dimenzija = dimenzija;
         this.cijenaProdaje = cijenaProdaje;
+        this.nazivAutora = nazivAutora;
+        this.nazivIzdavaca = nazivIzdavaca;
     }
 
     public int getIdKnjiga() {
@@ -139,5 +145,21 @@ public class Knjiga {
 
     public void setCijenaProdaje(BigDecimal cijenaProdaje) {
         this.cijenaProdaje = cijenaProdaje;
+    }
+
+    public String getNazivAutora() {
+        return nazivAutora;
+    }
+
+    public void setNazivAutora(String nazivAutora) {
+        this.nazivAutora = autor.getNazivAutora();
+    }
+
+    public String getNazivIzdavaca() {
+        return nazivIzdavaca;
+    }
+
+    public void setNazivIzdavaca(String nazivIzdavaca) {
+        this.nazivIzdavaca = izdavac.getNazivIzdavaca();
     }
 }

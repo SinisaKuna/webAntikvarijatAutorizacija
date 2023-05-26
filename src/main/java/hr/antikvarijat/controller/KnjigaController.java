@@ -1,10 +1,7 @@
 package hr.antikvarijat.controller;
 
 import hr.antikvarijat.exception.KnjigaNotFoundException;
-import hr.antikvarijat.model.Autor;
-import hr.antikvarijat.model.Drzava;
-import hr.antikvarijat.model.Izdavac;
-import hr.antikvarijat.model.Knjiga;
+import hr.antikvarijat.model.*;
 import hr.antikvarijat.service.AutorService;
 import hr.antikvarijat.service.IzdavacService;
 import hr.antikvarijat.service.KnjigaService;
@@ -14,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,10 +30,37 @@ public class KnjigaController {
 
     @GetMapping("")
     public String showKnjigeList(Model model) {
-        List<Knjiga> listKnjige = knjigaService.dohvatiSveKnjige();
-        model.addAttribute("listKnjige", listKnjige);
+
+        List<Kolona> listeKolona = new ArrayList<>();
+
+        listeKolona.add(new Kolona("ID","idKnjiga"));
+        listeKolona.add(new Kolona("Naziv knjige","nazivKnjige"));
+        listeKolona.add(new Kolona("Autor","nazivAutora"));
+        listeKolona.add(new Kolona("Izdavač","nazivIzdavaca"));
+        listeKolona.add(new Kolona("Godina izdanja","godinaIzdanja"));
+        listeKolona.add(new Kolona("Prodajna cijena","cijenaProdaje"));
+        List<Knjiga> listaPodataka = knjigaService.dohvatiSveKnjige();
+
+//
+//        prebačeno udovatiSveKnjige()
+//
+//        for (Knjiga knjiga : listaPodataka) {
+//            knjiga.setNazivAutora(null);
+//            knjiga.setNazivIzdavaca(null);
+//        }
+
+
+        model.addAttribute("naslov", "Popis knjiga");
+        model.addAttribute("dodajLink", "/knjige/new" );
+        model.addAttribute("urediLink", "/knjige/edit/{id}");
+        model.addAttribute("obrisiLink", "/knjige/delete/{id}");
+
+        model.addAttribute("listaPodataka", listaPodataka);
+        model.addAttribute("listeKolona", listeKolona);
         return "knjige";
     }
+
+
 
     @GetMapping("/new")
     public String showForm(Model model) {
@@ -80,4 +105,5 @@ public class KnjigaController {
         knjigaService.obrisiKnjigu(id);
         return "redirect:/knjige";
     }
+
 }

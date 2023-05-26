@@ -27,8 +27,14 @@ public class KnjigaService {
     }
 
     public List<Knjiga> dohvatiSveKnjige() {
-        return knjigaRepository.findAll();
+        List<Knjiga> listaKnjiga =  knjigaRepository.findAll();
+        for (Knjiga knjiga : listaKnjiga) {
+            knjiga.setNazivAutora(null);
+            knjiga.setNazivIzdavaca(null);
+        }
+        return  listaKnjiga;
     }
+
 
     public void obrisiKnjigu(int id) {
         knjigaRepository.deleteById(id);
