@@ -1,8 +1,12 @@
 package hr.antikvarijat.service;
 
 import hr.antikvarijat.exception.PartnerNotFoundException;
+import hr.antikvarijat.model.Grad;
 import hr.antikvarijat.model.Partner;
+import hr.antikvarijat.repository.GradRepository;
+import hr.antikvarijat.repository.IzdavacRepository;
 import hr.antikvarijat.repository.PartnerRepository;
+import hr.antikvarijat.repository.ProdajaZaglavljeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +23,12 @@ public class PartnerService {
     }
 
     public List<Partner> getAllPartners() {
-        return partnerRepository.findAll();
+
+        List<Partner> lista =  partnerRepository.findAll();
+        for (Partner partner : lista) {
+            partner.setNazivGrada(null);
+        }
+        return  lista;
     }
 
     public Partner getPartnerById(int id) {
@@ -33,6 +42,10 @@ public class PartnerService {
 
     public void deletePartner(int id) {
         Partner existingPartner = getPartnerById(id);
-        partnerRepository.delete(existingPartner);
+         partnerRepository.delete(existingPartner);
     }
+
+
+
+
 }

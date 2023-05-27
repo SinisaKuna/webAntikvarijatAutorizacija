@@ -17,12 +17,22 @@ public class Autor {
     @JoinColumn(name = "id_drzava")
     private Drzava drzava;
 
+    private String nazivDrzave;
+
     public Autor() {
     }
 
-    public Autor(String nazivAutora, Drzava drzava) {
+    public Autor(String nazivAutora, Drzava drzava, String nazivDrzave) {
         this.nazivAutora = nazivAutora;
         this.drzava = drzava;
+        this.nazivDrzave = nazivDrzave;
+    }
+    public String getNazivDrzave() {
+        return nazivDrzave;
+    }
+
+    public void setNazivDrzave(String nazivDrzave) {
+        this.nazivDrzave = drzava.getNazivDrzave();
     }
 
     public int getIdAutor() {

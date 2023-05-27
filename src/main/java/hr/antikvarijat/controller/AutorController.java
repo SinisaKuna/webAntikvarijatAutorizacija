@@ -3,6 +3,7 @@ package hr.antikvarijat.controller;
 import hr.antikvarijat.exception.AutorNotFoundException;
 import hr.antikvarijat.model.Autor;
 import hr.antikvarijat.model.Drzava;
+import hr.antikvarijat.model.Kolona;
 import hr.antikvarijat.service.AutorService;
 import hr.antikvarijat.service.DrzavaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,9 +29,24 @@ public class AutorController {
 
     @GetMapping("")
     public String showAutoriList(Model model) {
+
+
+        List<Kolona> listeKolona = new ArrayList<>();
+
+        listeKolona.add(new Kolona("ID","idAutor","idAutor"));
+        listeKolona.add(new Kolona("Naziv autora","nazivAutora","idAutor"));
+        listeKolona.add(new Kolona("Naziv države","nazivDrzave","idAutor"));
+
         List<Autor> listAutori = autorService.getAllAutori();
-        model.addAttribute("listAutori", listAutori);
-        return "autori";
+        model.addAttribute("listaPodataka", listAutori);
+
+        model.addAttribute("naslov", "Popis autora");
+        model.addAttribute("dodajLink", "/autori/new" );
+        model.addAttribute("urediLink", "/autori/edit/{id}");
+        model.addAttribute("obrisiLink", "/autori/delete/{id}");
+        model.addAttribute("listeKolona", listeKolona);
+
+        return "tablica";
     }
 
     @GetMapping("/new")

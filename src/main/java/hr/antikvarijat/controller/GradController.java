@@ -1,6 +1,7 @@
 package hr.antikvarijat.controller;
 import hr.antikvarijat.exception.DrzavaNotFoundException;
 import hr.antikvarijat.model.Drzava;
+import hr.antikvarijat.model.Kolona;
 import hr.antikvarijat.service.DrzavaService;
 import org.springframework.stereotype.Controller;
 
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,9 +32,24 @@ public class GradController {
     // # prikaz tablice .html #
     @GetMapping("")
     public String showGradoviList(Model model) {
+
+        List<Kolona> listeKolona = new ArrayList<>();
+
+        listeKolona.add(new Kolona("ID","idGrad","idGrad"));
+        listeKolona.add(new Kolona("Poštanski broj","postanskiBroj","idGrad"));
+        listeKolona.add(new Kolona("Naziv grada","nazivGrada","idGrad"));
+        listeKolona.add(new Kolona("Naziv države","nazivDrzave","idGrad"));
+
         List<Grad> listGradovi = gradService.getAllGradovi();
-        model.addAttribute("listGradovi", listGradovi);
-        return "gradovi";
+        model.addAttribute("listaPodataka", listGradovi);
+
+        model.addAttribute("naslov", "Popis gradova");
+        model.addAttribute("dodajLink", "/gradovi/new" );
+        model.addAttribute("urediLink", "/gradovi/edit/{id}");
+        model.addAttribute("obrisiLink", "/gradovi/delete/{id}");
+        model.addAttribute("listeKolona", listeKolona);
+
+        return "tablica";
     }
 
     // # dodavanje novog zapisa u tablicu .html #

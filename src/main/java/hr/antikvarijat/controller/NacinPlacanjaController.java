@@ -1,6 +1,7 @@
 package hr.antikvarijat.controller;
 
 import hr.antikvarijat.exception.NacinPlacanjaNotFoundException;
+import hr.antikvarijat.model.Kolona;
 import hr.antikvarijat.model.NacinPlacanja;
 import hr.antikvarijat.service.NacinPlacanjaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,9 +26,29 @@ public class NacinPlacanjaController {
 
     @GetMapping("")
     public String showNacinPlacanjaList(Model model) {
+
+        /*
+            <td th:text="${nacinPlacanja.idNacinPlacanja}"></td>
+            <td th:text="${nacinPlacanja.nazivNacinaPlacanja}"></td>
+            <td th:text="${nacinPlacanja.oznakaNacinaPlacanja}"></td>
+         */
+        List<Kolona> listeKolona = new ArrayList<>();
+
+        listeKolona.add(new Kolona("ID","idNacinPlacanja","idNacinPlacanja"));
+        listeKolona.add(new Kolona("Naziv načina plaćanja","nazivNacinaPlacanja","idNacinPlacanja"));
+        listeKolona.add(new Kolona("Oznaka načina plaćanja","oznakaNacinaPlacanja","idNacinPlacanja"));
+
+
         List<NacinPlacanja> listNacinPlacanja = nacinPlacanjaService.getAllNacinPlacanja();
-        model.addAttribute("listNacinPlacanja", listNacinPlacanja);
-        return "nacini_placanja";
+        model.addAttribute("listaPodataka", listNacinPlacanja);
+
+        model.addAttribute("naslov", "Popis načina plaćanja");
+        model.addAttribute("dodajLink", "/nacini_placanja/new" );
+        model.addAttribute("urediLink", "/nacini_placanja/edit/{id}");
+        model.addAttribute("obrisiLink", "/nacini_placanja/delete/{id}");
+        model.addAttribute("listeKolona", listeKolona);
+
+        return "tablica";
     }
 
     @GetMapping("/new")

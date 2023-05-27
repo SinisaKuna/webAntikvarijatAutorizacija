@@ -17,13 +17,24 @@ public class Izdavac {
     @JoinColumn(name = "id_grad", referencedColumnName = "id_grad", nullable = false)
     private Grad grad;
 
+    private String nazivGrada;
+
     public Izdavac() {
     }
 
-    public Izdavac(int idIzdavac, String nazivIzdavaca, Grad grad) {
+    public Izdavac(int idIzdavac, String nazivIzdavaca, Grad grad, String nazivGrada) {
         this.idIzdavac = idIzdavac;
         this.nazivIzdavaca = nazivIzdavaca;
         this.grad = grad;
+        this.nazivGrada = nazivGrada;
+    }
+
+    public String getNazivGrada() {
+        return nazivGrada;
+    }
+
+    public void setNazivGrada(String nazivGrada) {
+        this.nazivGrada = grad.getNazivGrada();
     }
 
     public int getIdIzdavac() {

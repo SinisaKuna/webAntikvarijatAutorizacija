@@ -2,6 +2,7 @@ package hr.antikvarijat.service;
 
 import hr.antikvarijat.exception.IzdavacNotFoundException;
 import hr.antikvarijat.model.Izdavac;
+import hr.antikvarijat.model.Partner;
 import hr.antikvarijat.repository.IzdavacRepository;
 import hr.antikvarijat.repository.KnjigaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,11 @@ public class IzdavacService {
     }
 
     public List<Izdavac> getAllIzdavaci() {
-        return (List<Izdavac>) izdavacRepository.findAll();
+        List<Izdavac> lista = izdavacRepository.findAll();
+        for (Izdavac izdavac : lista) {
+            izdavac.setNazivGrada(null);
+        }
+        return  lista;
     }
 
     public Izdavac getIzdavacById(int id) {

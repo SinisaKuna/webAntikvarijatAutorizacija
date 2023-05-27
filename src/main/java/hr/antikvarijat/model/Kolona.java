@@ -5,14 +5,13 @@ import java.util.List;
 
 public class Kolona {
     private String naziv;
-
-
-
     private String polje;
+    private String id;
 
-    public Kolona(String naziv, String polje) {
+    public Kolona(String naziv, String polje, String id) {
         this.naziv = naziv;
         this.polje = polje;
+        this.id = id;
     }
 
     public String getNaziv() {
@@ -31,6 +30,12 @@ public class Kolona {
         this.polje = polje;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 }
 

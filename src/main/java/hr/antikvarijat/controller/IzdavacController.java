@@ -4,6 +4,7 @@ import hr.antikvarijat.exception.AutorNotFoundException;
 import hr.antikvarijat.exception.IzdavacNotFoundException;
 import hr.antikvarijat.model.Grad;
 import hr.antikvarijat.model.Izdavac;
+import hr.antikvarijat.model.Kolona;
 import hr.antikvarijat.service.GradService;
 import hr.antikvarijat.service.IzdavacService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,9 +30,27 @@ public class IzdavacController {
 
     @GetMapping("")
     public String showIzdavaciList(Model model) {
+
+        List<Kolona> listeKolona = new ArrayList<>();
+
+        listeKolona.add(new Kolona("ID","idIzdavac","idIzdavac"));
+        listeKolona.add(new Kolona("Naziv izdavača","nazivIzdavaca","idIzdavac"));
+        listeKolona.add(new Kolona("Naziv grada","nazivGrada","idIzdavac"));
+
+
         List<Izdavac> listIzdavaci = izdavacService.getAllIzdavaci();
-        model.addAttribute("listIzdavaci", listIzdavaci);
-        return "izdavaci";
+        model.addAttribute("listaPodataka", listIzdavaci);
+
+
+        model.addAttribute("naslov", "* Popis izdavača");
+        model.addAttribute("dodajLink", "/izdavaci/new" );
+        model.addAttribute("urediLink", "/izdavaci/edit/{id}");
+        model.addAttribute("obrisiLink", "/izdavaci/delete/{id}");
+        model.addAttribute("listeKolona", listeKolona);
+
+
+
+        return "tablica";
     }
 
     @GetMapping("/new")

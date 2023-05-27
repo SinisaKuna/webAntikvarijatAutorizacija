@@ -47,7 +47,7 @@ public class AuthController {
                                Model model){
         User existing = userService.findByEmail(user.getEmail());
         if (existing != null) {
-            result.rejectValue("email", null, "Već postoji račun registriran s tom e-poštom.");
+            result.rejectValue("email", null, "Već postoji račun registriran s tom mail adresom.");
         }
         if (result.hasErrors()) {
             model.addAttribute("user", user);

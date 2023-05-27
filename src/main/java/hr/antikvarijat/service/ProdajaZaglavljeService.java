@@ -67,4 +67,11 @@ public class ProdajaZaglavljeService {
             throw new ProdajaZaglavljeNotFoundException("Prodaja zaglavlje s ID-om " + id + " ne postoji.");
         }
     }
+
+    @Autowired
+    private ProdajaZaglavljeRepository prodajaRepository;
+
+    public boolean hasProdajaZaglavlje(int id) {
+        return prodajaRepository.existsByPartnerIdPartner(id);
+    }
 }

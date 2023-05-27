@@ -30,19 +30,31 @@ public class Partner {
     @Column(name = "telefon")
     private String telefon;
 
+    private String nazivGrada;
+
     // Konstruktor, getteri i setteri
 
     public Partner() {
     }
 
-    public Partner(String nazivPartnera, String ulicaBroj, Grad grad, String oib, String email, String telefon) {
+    public Partner(String nazivPartnera, String ulicaBroj, Grad grad, String oib, String email, String telefon, String nazivGrada) {
         this.nazivPartnera = nazivPartnera;
         this.ulicaBroj = ulicaBroj;
         this.grad = grad;
         this.oib = oib;
         this.email = email;
         this.telefon = telefon;
+        this.nazivGrada = nazivGrada;
     }
+
+    public String getNazivGrada() {
+        return nazivGrada;
+    }
+
+    public void setNazivGrada(String nazivGrada) {
+        this.nazivGrada = grad.getNazivGrada();
+    }
+
 
     public int getIdPartner() {
         return idPartner;
@@ -99,4 +111,8 @@ public class Partner {
     public void setTelefon(String telefon) {
         this.telefon = telefon;
     }
+
+
+
+
 }

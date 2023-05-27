@@ -9,11 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface ProdajaZaglavljeRepository extends JpaRepository<ProdajaZaglavlje, Integer> {
 
 
-//    @Transactional
-//    default <S extends ProdajaZaglavlje> S saveWithNullPartner(S entity) {
-//        if (entity.getPartner() == null) {
-//            entity.setPartner(null);
-//        }
-//        return save(entity);
-//    }
+    boolean existsByPartnerIdPartner(int id);
 }

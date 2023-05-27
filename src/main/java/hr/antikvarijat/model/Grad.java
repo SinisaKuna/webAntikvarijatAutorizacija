@@ -21,15 +21,26 @@ public class Grad {
     @JoinColumn(name = "id_drzava", referencedColumnName = "id_drzava", nullable = false)
     private Drzava drzava;
 
-    // konstruktori, getteri i setteri
+    private String nazivDrzave;
 
     public Grad() {
     }
 
-    public Grad(String postanskiBroj, String nazivGrada, Drzava drzava) {
+
+
+    public Grad(String postanskiBroj, String nazivGrada, Drzava drzava, String nazivDrzave) {
         this.postanskiBroj = postanskiBroj;
         this.nazivGrada = nazivGrada;
         this.drzava = drzava;
+        this.nazivDrzave = nazivDrzave;
+    }
+
+    public String getNazivDrzave() {
+        return nazivDrzave;
+    }
+
+    public void setNazivDrzave(String nazivDrzave) {
+        this.nazivDrzave = drzava.getNazivDrzave();
     }
 
     public int getIdGrad() {

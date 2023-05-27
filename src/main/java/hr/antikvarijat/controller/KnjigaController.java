@@ -33,31 +33,24 @@ public class KnjigaController {
 
         List<Kolona> listeKolona = new ArrayList<>();
 
-        listeKolona.add(new Kolona("ID","idKnjiga"));
-        listeKolona.add(new Kolona("Naziv knjige","nazivKnjige"));
-        listeKolona.add(new Kolona("Autor","nazivAutora"));
-        listeKolona.add(new Kolona("Izdavač","nazivIzdavaca"));
-        listeKolona.add(new Kolona("Godina izdanja","godinaIzdanja"));
-        listeKolona.add(new Kolona("Prodajna cijena","cijenaProdaje"));
+        listeKolona.add(new Kolona("ID","idKnjiga","idKnjiga"));
+        listeKolona.add(new Kolona("Naziv knjige","nazivKnjige","idKnjiga"));
+        listeKolona.add(new Kolona("Autor","nazivAutora","idKnjiga"));
+        listeKolona.add(new Kolona("Izdavač","nazivIzdavaca","idKnjiga"));
+        listeKolona.add(new Kolona("Godina izdanja","godinaIzdanja","idKnjiga"));
+        listeKolona.add(new Kolona("Prodajna cijena","cijenaProdaje","idKnjiga"));
+
         List<Knjiga> listaPodataka = knjigaService.dohvatiSveKnjige();
-
-//
-//        prebačeno udovatiSveKnjige()
-//
-//        for (Knjiga knjiga : listaPodataka) {
-//            knjiga.setNazivAutora(null);
-//            knjiga.setNazivIzdavaca(null);
-//        }
-
 
         model.addAttribute("naslov", "Popis knjiga");
         model.addAttribute("dodajLink", "/knjige/new" );
         model.addAttribute("urediLink", "/knjige/edit/{id}");
         model.addAttribute("obrisiLink", "/knjige/delete/{id}");
+        model.addAttribute("listeKolona", listeKolona);
 
         model.addAttribute("listaPodataka", listaPodataka);
-        model.addAttribute("listeKolona", listeKolona);
-        return "knjige";
+
+        return "tablica";
     }
 
 

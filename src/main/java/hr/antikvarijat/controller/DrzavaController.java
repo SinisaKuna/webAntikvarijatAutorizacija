@@ -2,6 +2,7 @@ package hr.antikvarijat.controller;
 
 import hr.antikvarijat.exception.DrzavaNotFoundException;
 import hr.antikvarijat.model.Drzava;
+import hr.antikvarijat.model.Kolona;
 import hr.antikvarijat.repository.DrzavaRepository;
 import hr.antikvarijat.service.DrzavaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,9 +30,23 @@ public class DrzavaController {
 
     @GetMapping("")
     public String showDrzaveList(Model model) {
+
+        List<Kolona> listeKolona = new ArrayList<>();
+
+        listeKolona.add(new Kolona("ID","idDrzava","idDrzava"));
+        listeKolona.add(new Kolona("Naziv države","nazivDrzave","idDrzava"));
+
+
         List<Drzava> listDrzave = drzavaService.getAllDrzave();
-        model.addAttribute("listDrzave", listDrzave);
-        return "drzave";
+        model.addAttribute("listaPodataka", listDrzave);
+
+        model.addAttribute("naslov", "Popis država");
+        model.addAttribute("dodajLink", "/drzave/new" );
+        model.addAttribute("urediLink", "/drzave/edit/{id}");
+        model.addAttribute("obrisiLink", "/drzave/delete/{id}");
+        model.addAttribute("listeKolona", listeKolona);
+
+        return "tablica";
     }
 
     @GetMapping("/new")

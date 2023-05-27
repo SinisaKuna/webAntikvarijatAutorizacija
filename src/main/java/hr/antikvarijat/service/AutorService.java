@@ -2,6 +2,7 @@ package hr.antikvarijat.service;
 
 import hr.antikvarijat.exception.AutorNotFoundException;
 import hr.antikvarijat.model.Autor;
+import hr.antikvarijat.model.Grad;
 import hr.antikvarijat.repository.AutorRepository;
 import hr.antikvarijat.repository.KnjigaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,11 @@ public class AutorService {
     }
 
     public List<Autor> getAllAutori() {
-        return autorRepository.findAll();
+        List<Autor> lista =  autorRepository.findAll();
+        for (Autor autor : lista) {
+            autor.setNazivDrzave(null);
+        }
+        return  lista;
     }
 
     public Autor getAutorById(int id) {
