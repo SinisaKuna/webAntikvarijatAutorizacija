@@ -1,6 +1,5 @@
 package hr.antikvarijat.model;
 
-import hr.antikvarijat.entity.User;
 import jakarta.persistence.*;
 
 import java.sql.Date;

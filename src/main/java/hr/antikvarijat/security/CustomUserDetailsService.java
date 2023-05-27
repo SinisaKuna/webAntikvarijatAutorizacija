@@ -1,7 +1,7 @@
 package hr.antikvarijat.security;
 
-import hr.antikvarijat.entity.Role;
-import hr.antikvarijat.entity.User;
+import hr.antikvarijat.model.Role;
+import hr.antikvarijat.model.User;
 import hr.antikvarijat.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

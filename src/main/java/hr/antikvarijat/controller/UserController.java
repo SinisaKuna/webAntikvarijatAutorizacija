@@ -1,7 +1,7 @@
 package hr.antikvarijat.controller;
 
 import hr.antikvarijat.dto.UserDto;
-import hr.antikvarijat.entity.User;
+import hr.antikvarijat.model.User;
 import hr.antikvarijat.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class AuthController {
+public class UserController {
 
     private UserService userService;
 
-    public AuthController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

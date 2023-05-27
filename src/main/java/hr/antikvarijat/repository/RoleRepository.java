@@ -1,6 +1,6 @@
 package hr.antikvarijat.repository;
 
-import hr.antikvarijat.entity.Role;
+import hr.antikvarijat.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {

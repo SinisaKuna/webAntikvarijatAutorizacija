@@ -51,7 +51,7 @@
                         <span sec:authentication="name">not found</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/users">Operateri</a>
+                        <a class="dropdown-item" href="/users">Korisnici</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Odjava</a>
                     </div>
@@ -100,7 +100,12 @@
                     </ul>
                 </div>
             </div>
-
+            <div class="col-sm-9 col-md-10">
+                <div class="container">
+                    <br>
+                    <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

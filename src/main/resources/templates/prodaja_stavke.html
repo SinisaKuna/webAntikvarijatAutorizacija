@@ -1,37 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
-<!--  <title>Popis knjiga</title>-->
-  <title th:text="${naslov}">Popis podataka</title>
+  <title>Popis prodaja stavki</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
-        /* Dodani stil za sidebar */
-        .sidebar {
-            background-color: #343a40;
-            color: #fff;
-            width: 200px;
-            min-height: 100vh;
-            padding: 2rem;
-        }
+    /* Dodani stil za sidebar */
+    .sidebar {
+      background-color: #343a40;
+      color: #fff;
+      width: 200px;
+      min-height: 100vh;
+      padding: 2rem;
+    }
 
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        .sidebar li {
-            margin-bottom: 1rem;
-        }
+    .sidebar li {
+      margin-bottom: 1rem;
+    }
 
-        .sidebar a {
-            color: #fff;
-            text-decoration: none;
-        }
-    </style>
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -59,6 +59,8 @@
       </ul>
     </div>
   </nav>
+
+
   <div class="container-fluid">
     <div class="row">
       <!-- SIDEBAR -->
@@ -99,34 +101,48 @@
         </div>
       </div>
 
-
       <!-- TABLICA -->
       <div class="col-sm-9 col-md-10">
         <div class="container">
           <br>
-          <h4 th:text="${naslov}">Popis podataka</h4>
+          <h4>Stavke prodaje</h4>
           <hr>
+          <!-- Provjera poruke o grešci -->
           <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
-          <a th:href="@{${dodajLink}}" class="btn btn-primary">Dodaj</a>
-          <div class="table-responsive">
-            <table class="table table-striped table-hover">
-              <thead>
-              <tr>
-                <th th:each="kolona : ${listeKolona}" th:text="${kolona.naziv}"></th>
-                <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr th:each="podatak : ${listaPodataka}">
-                <td th:each="kolona : ${listeKolona}" th:text="${podatak[kolona.polje]}"></td>
-                <td>
-                  <a th:href="@{${urediLink}(id=${podatak[listeKolona[0].id]})}" class="btn btn-primary">Uredi</a>
-                  <a th:href="@{${obrisiLink}(id=${podatak[listeKolona[0].id]})}" class="btn btn-danger">Obriši</a>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+          <!-- Dodavanje nove prodaje stavki -->
+          <a href="/prodaja_stavke/new" class="btn btn-primary">Dodaj</a>
+          <!-- Tablica prodaja stavki -->
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Količina</th>
+              <th>Jedinična cijena</th>
+              <th>Ukupna cijena</th>
+              <th>Prodaja zaglavlje ID</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iteriranje kroz popis prodaja stavki -->
+            <tr th:each="prodajaStavka : ${listaProdajaStavki}">
+              <td th:text="${prodajaStavka.id}"></td>
+              <td th:text="${prodajaStavka.kolicina}"></td>
+              <td th:text="${prodajaStavka.jedinicnaCijena}"></td>
+              <td th:text="${prodajaStavka.ukupnaCijena}"></td>
+              <td th:text="${prodajaStavka.prodajaZaglavljeId}"></td>
+              <td>
+                <!-- Uređivanje prodaja stavke -->
+                <a th:href="@{/prodaja_stavke/edit/{id}(id=${prodajaStavka.id})}"
+                   class="btn btn-primary">Uredi</a>
+                <!-- Brisanje prodaja stavke -->
+                <a th:href="@{/prodaja_stavke/delete/{id}(id=${prodajaStavka.id})}"
+                   class="btn btn-danger">Obriši</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- Povratak na početnu stranicu -->
           <a href="/" class="btn btn-secondary">Povratak</a>
         </div>
       </div>

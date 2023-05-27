@@ -1,5 +1,6 @@
-package hr.antikvarijat.entity;
+package hr.antikvarijat.model;
 
+import hr.antikvarijat.model.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

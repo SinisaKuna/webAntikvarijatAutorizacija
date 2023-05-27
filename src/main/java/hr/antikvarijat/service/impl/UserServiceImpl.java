@@ -1,8 +1,8 @@
 package hr.antikvarijat.service.impl;
 
 import hr.antikvarijat.dto.UserDto;
-import hr.antikvarijat.entity.Role;
-import hr.antikvarijat.entity.User;
+import hr.antikvarijat.model.Role;
+import hr.antikvarijat.model.User;
 import hr.antikvarijat.repository.RoleRepository;
 import hr.antikvarijat.repository.UserRepository;
 import hr.antikvarijat.service.UserService;

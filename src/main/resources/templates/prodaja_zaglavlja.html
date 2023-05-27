@@ -51,7 +51,7 @@
             <span sec:authentication="name">not found</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/users">Operateri</a>
+            <a class="dropdown-item" href="/users">Korisnici</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">Odjava</a>
           </div>
@@ -109,7 +109,9 @@
       <!-- TABLICA -->
       <div class="col-sm-9 col-md-10">
         <div class="container">
-          <h3>Popis prodaja zaglavlja</h3>
+          <br>
+          <h4>Prodaja</h4>
+          <hr>
           <!-- Provjera poruke o grešci -->
           <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
           <!-- Dodavanje novog prodaja zaglavlja -->

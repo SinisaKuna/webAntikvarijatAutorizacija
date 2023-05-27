@@ -1,7 +1,7 @@
 package hr.antikvarijat.service;
 
 import hr.antikvarijat.dto.UserDto;
-import hr.antikvarijat.entity.User;
+import hr.antikvarijat.model.User;
 
 import java.util.List;
 

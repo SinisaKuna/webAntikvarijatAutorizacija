@@ -1,4 +1,4 @@
-package hr.antikvarijat.entity;
+package hr.antikvarijat.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

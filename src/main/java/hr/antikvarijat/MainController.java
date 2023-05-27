@@ -14,16 +14,13 @@ public class MainController {
         return "antikvarijat";
     }
 
-    @GetMapping("/otkup")
-    public String showNoOtkup() { return "redirect:antikvarijat"; }
 
-    @GetMapping("/rezervacija")
-    public String showNoRezervacija() { return "redirect:antikvarijat"; }
 
-    @GetMapping("/operateri")
-    public String showUsers() {
-        return "redirect:/users";
-    }
+
+//    @GetMapping("/operateri")
+//    public String showUsers() {
+//        return "redirect:/users";
+//    }
 
     @GetMapping("/odjava")
     public String showOdjava() {
@@ -32,5 +29,15 @@ public class MainController {
 
     @GetMapping("/antikvarijat")
     public String antikvarijat(){ return "antikvarijat"; }
+
+    @GetMapping("/rezervacija")
+    public String showNoRezervacija(RedirectAttributes ra) {
+        ra.addFlashAttribute("message", "Izrada stranice u tijeku...");
+        return "redirect:antikvarijat";
+    }
+
+    @GetMapping("/otkup")
+    // ZA SADA U FAZI IZRADE PRODAJE
+    public String showFazaIzradeProdaje() { return "redirect:prodaja_stavke"; }
 
 }

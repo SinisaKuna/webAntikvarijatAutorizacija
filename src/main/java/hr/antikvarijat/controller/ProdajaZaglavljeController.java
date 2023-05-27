@@ -1,7 +1,7 @@
 package hr.antikvarijat.controller;
 
 import hr.antikvarijat.dto.UserDto;
-import hr.antikvarijat.entity.User;
+import hr.antikvarijat.model.User;
 import hr.antikvarijat.exception.ProdajaZaglavljeNotFoundException;
 import hr.antikvarijat.model.Partner;
 import hr.antikvarijat.model.NacinPlacanja;

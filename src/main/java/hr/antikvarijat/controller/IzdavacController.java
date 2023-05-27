@@ -42,7 +42,7 @@ public class IzdavacController {
         model.addAttribute("listaPodataka", listIzdavaci);
 
 
-        model.addAttribute("naslov", "* Popis izdavača");
+        model.addAttribute("naslov", "Popis izdavača");
         model.addAttribute("dodajLink", "/izdavaci/new" );
         model.addAttribute("urediLink", "/izdavaci/edit/{id}");
         model.addAttribute("obrisiLink", "/izdavaci/delete/{id}");
