@@ -14,24 +14,17 @@ public class MainController {
         return "antikvarijat";
     }
 
+    @GetMapping("/antikvarijat")
+    public String antikvarijat(){ return "antikvarijat"; }
 
-
-
-//    @GetMapping("/operateri")
-//    public String showUsers() {
-//        return "redirect:/users";
-//    }
 
     @GetMapping("/odjava")
     public String showOdjava() {
         return "redirect:/logout";
     }
 
-    @GetMapping("/antikvarijat")
-    public String antikvarijat(){ return "antikvarijat"; }
-
     @GetMapping("/rezervacija")
-    public String showNoRezervacija(RedirectAttributes ra) {
+    public String showNo1(RedirectAttributes ra) {
         ra.addFlashAttribute("message", "Izrada stranice u tijeku...");
         return "redirect:antikvarijat";
     }

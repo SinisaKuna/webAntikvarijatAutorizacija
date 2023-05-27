@@ -1,4 +1,4 @@
-package hr.antikvarijat.service.impl;
+package hr.antikvarijat.impl;
 
 import hr.antikvarijat.dto.UserDto;
 import hr.antikvarijat.model.Role;

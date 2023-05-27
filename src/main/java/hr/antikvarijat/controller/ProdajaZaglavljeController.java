@@ -9,7 +9,7 @@ import hr.antikvarijat.model.ProdajaZaglavlje;
 import hr.antikvarijat.service.PartnerService;
 import hr.antikvarijat.service.NacinPlacanjaService;
 import hr.antikvarijat.service.ProdajaZaglavljeService;
-import hr.antikvarijat.service.impl.UserServiceImpl;
+import hr.antikvarijat.impl.UserServiceImpl;
 
 
 import org.springframework.security.core.Authentication;
