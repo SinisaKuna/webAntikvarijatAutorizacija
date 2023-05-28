@@ -8,6 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
+   * {
+          font-size: 14px;
+        }
     /* Dodani stil za sidebar */
     .sidebar {
       background-color: #343a40;
@@ -31,6 +34,8 @@
       color: #fff;
       text-decoration: none;
     }
+
+
   </style>
 </head>
 <body>
@@ -63,8 +68,9 @@
 
   <div class="container-fluid">
     <div class="row">
+
       <!-- SIDEBAR -->
-      <div class="col-md-2 col-xl-1 px-sm-2 px-0 bg-dark">
+      <div class="col-xl-1 col-md-2 col-sm-2 px-sm-2 px-0 bg-dark">
         <div class="sidebar">
           <ul class="nav flex-column">
             <li class="nav-item">
@@ -102,7 +108,7 @@
       </div>
 
       <!-- TABLICA -->
-      <div class="col-sm-9 col-md-10">
+      <div class="col-xl-10 col-md-10 col-sm-10">
         <div class="container">
           <br>
           <h4>Stavke prodaje</h4>
@@ -116,10 +122,12 @@
             <thead>
             <tr>
               <th>ID</th>
+              <th>RN</th>
+              <th>Knjiga</th>
               <th>Količina</th>
               <th>Jedinična cijena</th>
               <th>Ukupna cijena</th>
-              <th>Prodaja zaglavlje ID</th>
+
               <th></th>
             </tr>
             </thead>
@@ -127,10 +135,11 @@
             <!-- Iteriranje kroz popis prodaja stavki -->
             <tr th:each="prodajaStavka : ${listaProdajaStavki}">
               <td th:text="${prodajaStavka.id}"></td>
+              <td th:text="${prodajaStavka.prodajaZaglavljeId}"></td>
+              <td th:text="@{${prodajaStavka.knjiga.nazivKnjige}}"></td>
               <td th:text="${prodajaStavka.kolicina}"></td>
               <td th:text="${prodajaStavka.jedinicnaCijena}"></td>
               <td th:text="${prodajaStavka.ukupnaCijena}"></td>
-              <td th:text="${prodajaStavka.prodajaZaglavljeId}"></td>
               <td>
                 <!-- Uređivanje prodaja stavke -->
                 <a th:href="@{/prodaja_stavke/edit/{id}(id=${prodajaStavka.id})}"
@@ -146,6 +155,7 @@
           <a href="/" class="btn btn-secondary">Povratak</a>
         </div>
       </div>
+
     </div>
   </div>
 </div>

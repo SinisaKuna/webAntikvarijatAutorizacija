@@ -3,7 +3,7 @@ package hr.antikvarijat.controller;
 import hr.antikvarijat.exception.AutorNotFoundException;
 import hr.antikvarijat.model.Autor;
 import hr.antikvarijat.model.Drzava;
-import hr.antikvarijat.model.Kolona;
+import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.service.AutorService;
 import hr.antikvarijat.service.DrzavaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,8 @@ public class AutorController {
     @GetMapping("/new")
     public String showForm(Model model) {
         Drzava drzava = new Drzava();
-        List<Drzava> listaDrzava = drzavaService.getAllDrzave();
+//        List<Drzava> listaDrzava = drzavaService.getAllDrzave();
+        List<Drzava> listaDrzava = drzavaService.getSortedDrzave();
         Autor autor = new Autor();
         model.addAttribute("autor", autor);
         model.addAttribute("drzave", listaDrzava);

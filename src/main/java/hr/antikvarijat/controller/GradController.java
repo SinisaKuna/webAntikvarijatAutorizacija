@@ -1,8 +1,9 @@
 package hr.antikvarijat.controller;
 import hr.antikvarijat.exception.DrzavaNotFoundException;
 import hr.antikvarijat.model.Drzava;
-import hr.antikvarijat.model.Kolona;
+import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.service.DrzavaService;
+import hr.antikvarijat.servis.Podatak;
 import org.springframework.stereotype.Controller;
 
 import hr.antikvarijat.exception.GradNotFoundException;
@@ -29,12 +30,11 @@ public class GradController {
         this.drzavaService = drzavaService;
     }
 
-    // # prikaz tablice .html #
+    // # prikaz tablice
     @GetMapping("")
     public String showGradoviList(Model model) {
 
         List<Kolona> listeKolona = new ArrayList<>();
-
         listeKolona.add(new Kolona("ID","idGrad","idGrad"));
         listeKolona.add(new Kolona("Poštanski broj","postanskiBroj","idGrad"));
         listeKolona.add(new Kolona("Naziv grada","nazivGrada","idGrad"));
@@ -52,54 +52,6 @@ public class GradController {
         return "tablica";
     }
 
-    // # dodavanje novog zapisa u tablicu .html #
-    @GetMapping("/new")
-    public String showForm(Model model) {
-
-        Drzava drzava = new Drzava();
-        List<Drzava> listaDrzava = drzavaService.getAllDrzave();
-
-        Grad grad = new Grad(); // Create a new Grad object
-
-        // Set other necessary attributes if needed
-        model.addAttribute("grad", grad);
-        model.addAttribute("drzave", listaDrzava);
-        return "grad_form";
-    }
-
-    // # spremanje novog zapisa u tablicu POSTMAN #
-    @PostMapping("/body/save")
-    public String dodajGrad(@RequestBody Grad grad) {
-        Drzava drzava = drzavaService.getDrzavaById(grad.getDrzava().getIdDrzava());
-        grad.setDrzava(drzava);
-        gradService.saveGrad(grad);
-        return "redirect:/gradovi";
-    }
-
-    // # spremanje novog zapisa u tablicu .html #
-    @PostMapping("/save")
-    public String addGrad(@ModelAttribute("grad") Grad grad) {
-        Drzava drzava = drzavaService.getDrzavaById(grad.getDrzava().getIdDrzava());
-        grad.setDrzava(drzava);
-        gradService.saveGrad(grad);
-        return "redirect:/gradovi";
-    }
-
-    // # editiranje zapisa u tablici .html #
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") int idGrad, Model model, RedirectAttributes ra) {
-        try {
-            List<Drzava> listaDrzava = drzavaService.getAllDrzave();
-            Grad grad = gradService.getGradById(idGrad);
-            model.addAttribute("grad", grad);
-            model.addAttribute("drzave", listaDrzava);
-            return "grad_form";
-        } catch (GradNotFoundException e) {
-            ra.addFlashAttribute("message", e.getMessage());
-            return "redirect:/gradovi";
-        }
-    }
-
     // # brisanje zapisa u tablici .html #
     @GetMapping("/delete/{id}")
     public String deleteGrad(@PathVariable int id, RedirectAttributes ra) {
@@ -114,4 +66,49 @@ public class GradController {
         }
         return "redirect:/gradovi";
     }
+
+    // # spremanje podatka
+    @PostMapping("/save")
+    public String addGrad(@ModelAttribute("grad") Grad grad) {
+        Drzava drzava = drzavaService.getDrzavaById(grad.getDrzava().getIdDrzava());
+        grad.setDrzava(drzava);
+        gradService.saveGrad(grad);
+        return "redirect:/gradovi";
+    }
+
+
+
+    // # forma za upis novog podatka
+    @GetMapping("/new")
+    public String showForm(Model model) {
+
+        Drzava drzava = new Drzava();
+        List<Drzava> listaDrzava = drzavaService.getSortedDrzave();
+
+        Grad grad = new Grad();
+
+
+        // Set other necessary attributes if needed
+        model.addAttribute("grad", grad);
+        model.addAttribute("drzave", listaDrzava);
+        return "grad_form";
+    }
+
+
+    // # forma za promjenu podatka
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") int idGrad, Model model, RedirectAttributes ra) {
+        try {
+            List<Drzava> listaDrzava = drzavaService.getAllDrzave();
+            Grad grad = gradService.getGradById(idGrad);
+            model.addAttribute("grad", grad);
+            model.addAttribute("drzave", listaDrzava);
+            return "grad_form";
+        } catch (GradNotFoundException e) {
+            ra.addFlashAttribute("message", e.getMessage());
+            return "redirect:/gradovi";
+        }
+    }
+
+
 }

@@ -4,7 +4,7 @@ import hr.antikvarijat.exception.AutorNotFoundException;
 import hr.antikvarijat.exception.IzdavacNotFoundException;
 import hr.antikvarijat.model.Grad;
 import hr.antikvarijat.model.Izdavac;
-import hr.antikvarijat.model.Kolona;
+import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.service.GradService;
 import hr.antikvarijat.service.IzdavacService;
 import org.springframework.beans.factory.annotation.Autowired;

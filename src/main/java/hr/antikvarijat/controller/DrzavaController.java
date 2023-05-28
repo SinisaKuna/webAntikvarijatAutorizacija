@@ -2,7 +2,7 @@ package hr.antikvarijat.controller;
 
 import hr.antikvarijat.exception.DrzavaNotFoundException;
 import hr.antikvarijat.model.Drzava;
-import hr.antikvarijat.model.Kolona;
+import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.repository.DrzavaRepository;
 import hr.antikvarijat.service.DrzavaService;
 import org.springframework.beans.factory.annotation.Autowired;

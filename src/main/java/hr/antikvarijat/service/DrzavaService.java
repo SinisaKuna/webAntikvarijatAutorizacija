@@ -8,6 +8,8 @@ import hr.antikvarijat.repository.DrzavaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,15 @@ public class DrzavaService {
     public List<Drzava> getAllDrzave() {
         return drzavaRepository.findAll();
     }
+
+
+    public List<Drzava> getSortedDrzave() {
+
+        List<Drzava> drzave = getAllDrzave();
+        Collections.sort(drzave, (d1, d2) -> d1.getNazivDrzave().compareToIgnoreCase(d2.getNazivDrzave()));
+        return drzave;
+    }
+
 
     public Drzava getDrzavaById(int id) {
         Optional<Drzava> optionalDrzava = drzavaRepository.findById(id);

@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <title>Unos/uređivanje autora</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <style>
+    * {
+         font-size: 14px;
+     }
+  </style>
 </head>
 <body>
 
@@ -23,7 +29,7 @@
             <span sec:authentication="name">not found</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/users">Operateri</a>
+            <a class="dropdown-item" href="/users">Korisnici</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">Odjava</a>
           </div>
@@ -36,7 +42,10 @@
 
 
 <div class="container mt-4">
-  <h2>Unos/uređivanje autora</h2>
+<!--  <h2>Unos/uređivanje autora</h2>-->
+  <br>
+  <h4>Autor</h4>
+  <hr>
 
 
   <form th:object="${autor}" th:action="@{/autori/save}" method="post">
@@ -55,7 +64,6 @@
         <option th:each="drzava : ${drzave}" th:value="${drzava.idDrzava}" th:text="${drzava.nazivDrzave}"></option>
       </select>
     </div>
-
 
     <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
     <button type="submit" class="btn btn-primary" th:text="${autor.idAutor != 0 ? 'Ažuriraj' : 'Spremi'}"></button>

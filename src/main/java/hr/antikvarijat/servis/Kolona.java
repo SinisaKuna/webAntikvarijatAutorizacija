@@ -1,7 +1,4 @@
-package hr.antikvarijat.model;
-
-import java.util.ArrayList;
-import java.util.List;
+package hr.antikvarijat.servis;
 
 public class Kolona {
     private String naziv;

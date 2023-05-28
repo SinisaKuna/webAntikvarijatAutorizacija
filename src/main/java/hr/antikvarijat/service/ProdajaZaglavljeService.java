@@ -39,24 +39,6 @@ public class ProdajaZaglavljeService {
     }
 
     public ProdajaZaglavlje saveProdajaZaglavlje(ProdajaZaglavlje prodajaZaglavlje) {
-
-//        if (prodajaZaglavlje.getPartner() == null) {
-//            Partner partner = new Partner();
-//            partner.setIdPartner(0);
-//            //partnerRepository.save(partner);
-//            prodajaZaglavlje.setPartner(partner);
-//        }
-//        if (prodajaZaglavlje.getOperater() == null) {
-//            User operater = new User();
-//            operater.setIdOperater(0);
-//            //operaterRepository.save(operater);
-//            prodajaZaglavlje.setOperater(operater);
-//        }
-//        if (prodajaZaglavlje.getNacinPlacanja() == null) {
-//            NacinPlacanja np = new NacinPlacanja();
-//            np.setIdNacinPlacanja(0);
-//            prodajaZaglavlje.setNacinPlacanja(np);
-//        }
         return prodajaZaglavljeRepository.save(prodajaZaglavlje);
     }
 

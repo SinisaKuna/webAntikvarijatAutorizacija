@@ -4,7 +4,7 @@ import hr.antikvarijat.exception.DrzavaNotFoundException;
 import hr.antikvarijat.exception.PartnerNotFoundException;
 import hr.antikvarijat.service.ProdajaZaglavljeService;
 import hr.antikvarijat.model.Grad;
-import hr.antikvarijat.model.Kolona;
+import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.model.Partner;
 import hr.antikvarijat.service.GradService;
 import hr.antikvarijat.service.PartnerService;

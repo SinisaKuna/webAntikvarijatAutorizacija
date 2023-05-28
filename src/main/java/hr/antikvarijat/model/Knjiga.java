@@ -47,6 +47,8 @@ public class Knjiga {
     private String nazivIzdavaca;
 
 
+
+
     // konstruktor, getteri i setteri
 
     public Knjiga() {
@@ -66,6 +68,7 @@ public class Knjiga {
         this.nazivAutora = nazivAutora;
         this.nazivIzdavaca = nazivIzdavaca;
     }
+
 
     public int getIdKnjiga() {
         return idKnjiga;
@@ -151,6 +154,10 @@ public class Knjiga {
         return nazivAutora;
     }
 
+//    public int getIdPoljePodatka() {
+//        return idKnjiga;
+//    }
+
     public void setNazivAutora(String nazivAutora) {
         this.nazivAutora = autor.getNazivAutora();
     }
@@ -162,4 +169,9 @@ public class Knjiga {
     public void setNazivIzdavaca(String nazivIzdavaca) {
         this.nazivIzdavaca = izdavac.getNazivIzdavaca();
     }
+
+//    public int getIdAutor() {
+//        return autor.getIdAutor();
+//    }
+
 }

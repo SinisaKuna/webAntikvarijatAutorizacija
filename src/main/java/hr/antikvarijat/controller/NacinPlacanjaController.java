@@ -1,7 +1,7 @@
 package hr.antikvarijat.controller;
 
 import hr.antikvarijat.exception.NacinPlacanjaNotFoundException;
-import hr.antikvarijat.model.Kolona;
+import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.model.NacinPlacanja;
 import hr.antikvarijat.service.NacinPlacanjaService;
 import org.springframework.beans.factory.annotation.Autowired;

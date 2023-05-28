@@ -5,6 +5,12 @@
   <title>Unos/uređivanje načina plaćanja</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+
+<style>
+    * {
+         font-size: 14px;
+     }
+  </style>
 <body>
 
 <div class="content">
@@ -23,7 +29,7 @@
             <span sec:authentication="name">not found</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/users">Operateri</a>
+            <a class="dropdown-item" href="/users">Korisnici</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">Odjava</a>
           </div>
@@ -34,7 +40,10 @@
 </div>
 
 <div class="container">
-  <h2>Unos/uređivanje načina plaćanja</h2>
+
+  <br>
+  <h4>Način plaćanja</h4>
+  <hr>
   <form th:object="${nacinPlacanja}" th:action="@{/nacini_placanja/save}" method="post">
 
     <input type="hidden" th:field="*{idNacinPlacanja}">
