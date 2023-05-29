@@ -12,20 +12,22 @@ public class Podatak<T> {
 
     private String naziv;
     private String polje;
-
-    private String veza;
-
+    private String model;
+    private String id;
     private String opcija;
 
-    private List<T> lista;
 
-    public Podatak(String naziv, String polje, String opcija, String veza, List<T> lista) {
+
+    public Podatak(String naziv, String polje, String model, String id, String opcija) {
         this.naziv = naziv;
         this.polje = polje;
+        this.model = model;
+        this.id = id;
         this.opcija = opcija;
-        this.lista = lista;
-        this.veza = veza;
+
+
     }
+
     public String getNaziv() {
         return naziv;
     }
@@ -42,6 +44,22 @@ public class Podatak<T> {
         this.polje = polje;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getOpcija() {
         return opcija;
     }
@@ -49,22 +67,4 @@ public class Podatak<T> {
     public void setOpcija(String opcija) {
         this.opcija = opcija;
     }
-
-    public String getVeza() {
-        return veza;
-    }
-
-    public void setVeza(String veza) {
-        this.veza = veza;
-    }
-
-    public List<T> getLista() {
-        return lista;
-    }
-
-    public void setLista(List<T> lista) {
-        this.lista = lista;
-    }
-
-
 }

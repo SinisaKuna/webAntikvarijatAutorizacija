@@ -64,8 +64,7 @@
         <div class="form-group">
             <label for="idIzdavac">Izdavač:</label>
             <select class="form-control" id="idIzdavac" th:field="*{izdavac.idIzdavac}">
-                <option th:each="izdavac : ${izdavac}" th:value="${izdavac.idIzdavac}"
-                        th:text="${izdavac.nazivIzdavaca}"></option>
+                <option th:each="izdavac : ${izdavac}" th:value="${izdavac.idIzdavac}" th:text="${izdavac.nazivIzdavaca}"></option>
             </select>
         </div>
 

@@ -3,93 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title><!DOCTYPE html>
-      <html xmlns:th="http://www.thymeleaf.org">
-      <head>
-      <meta charset="UTF-8">
-      <title>Unos/uređivanje partnera</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <html xmlns:th="http://www.thymeleaf.org">
+        <head>
+        <meta charset="UTF-8">
+        <title>Unos/uređivanje partnera</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <style>
     * {
          font-size: 14px;
      }
-  </style>
+
+
+</style>
 <body>
 
 <div class="content">
-  <!--  NAVBAR-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Antikvarijat knjiga</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <span sec:authentication="name">not found</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/users">Korisnici</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/logout">Odjava</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    <!--  NAVBAR-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Antikvarijat knjiga</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span sec:authentication="name">not found</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/users">Korisnici</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Odjava</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
 <div class="container mt-4">
 
-  <br>
-  <h4>Partner</h4>
-  <hr>
+    <br>
+    <h4>Partner</h4>
+    <hr>
 
-  <form th:object="${partner}" th:action="@{/partneri/save}" method="post">
+    <form th:object="${partner}" th:action="@{/partneri/save}" method="post">
 
-    <input type="hidden" th:field="*{idPartner}">
+        <input type="hidden" th:field="*{idPartner}">
 
-    <div class="form-group">
-      <label for="nazivPartnera">Naziv partnera:</label>
-      <input type="text" class="form-control" id="nazivPartnera" th:field="*{nazivPartnera}">
-    </div>
+        <div class="form-group">
+            <label for="nazivPartnera">Naziv partnera:</label>
+            <input type="text" class="form-control" id="nazivPartnera" th:field="*{nazivPartnera}">
+        </div>
 
-    <div class="form-group">
-      <label for="ulicaBroj">Ulica i broj:</label>
-      <input type="text" class="form-control" id="ulicaBroj" th:field="*{ulicaBroj}">
-    </div>
+        <div class="form-group">
+            <label for="ulicaBroj">Ulica i broj:</label>
+            <input type="text" class="form-control" id="ulicaBroj" th:field="*{ulicaBroj}">
+        </div>
 
-    <div class="form-group">
-      <label for="idGrad">Grad:</label>
-      <select class="form-control" id="idGrad" th:field="*{grad.idGrad}">
-        <option th:each="grad : ${gradovi}" th:value="${grad.idGrad}" th:text="${grad.nazivGrada}"></option>
-      </select>
-    </div>
+        <div class="form-group">
+            <label for="idGrad">Grad:</label>
+            <select class="form-control" id="idGrad" th:field="*{grad.idGrad}">
+                <option th:each="grad : ${gradovi}" th:value="${grad.idGrad}" th:text="${grad.nazivGrada}"></option>
+            </select>
+        </div>
 
-    <div class="form-group">
-      <label for="oib">Oib:</label>
-      <input type="text" class="form-control" id="oib" th:field="*{oib}">
-    </div>
+        <div class="form-group">
+            <label for="oib">Oib:</label>
+            <input type="text" class="form-control" id="oib" th:field="*{oib}">
+        </div>
 
-    <div class="form-group">
-      <label for="email">Mail adresa:</label>
-      <input type="text" class="form-control" id="email" th:field="*{email}">
-    </div>
+        <div class="form-group">
+            <label for="email">Mail adresa:</label>
+            <input type="text" class="form-control" id="email" th:field="*{email}">
+        </div>
 
-    <div class="form-group">
-      <label for="telefon">Broj telefona:</label>
-      <input type="text" class="form-control" id="telefon" th:field="*{telefon}">
-    </div>
+        <div class="form-group">
+            <label for="telefon">Broj telefona:</label>
+            <input type="text" class="form-control" id="telefon" th:field="*{telefon}">
+        </div>
 
 
-    <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
-    <button type="submit" class="btn btn-primary" th:text="${partner.idPartner != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
-    <!-- Gumb za odustajanje -->
-    <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
-  </form>
+        <!-- Tekst na gumbu ovisno o načinu korištenja forme (unos/uređivanje) -->
+        <button type="submit" class="btn btn-primary"
+                th:text="${partner.idPartner != 0 ? 'Ažuriraj' : 'Spremi'}"></button>
+        <!-- Gumb za odustajanje -->
+        <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
+    </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -100,12 +101,8 @@
   function cancelForm() {
     window.location = "[[@{/partneri}]]";
   }
-</script>
-</body>
-</html>
-</title>
-</head>
-<body>
 
+
+</script>
 </body>
 </html>

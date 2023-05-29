@@ -66,38 +66,24 @@ public class KnjigaController {
         List<Izdavac> listaIzdavaca = izdavacService.getAllIzdavaci();
         Knjiga knjiga = new Knjiga();
 
-        // NOVI DIO KODA POČETAK
+        List<Podatak> sviPodaci = new ArrayList<>();
 
-        Podatak<Object> nazivKnjige = new Podatak<>("Naziv Knjige", "nazivKnjige","", "",new ArrayList<>());
-        Podatak<Autor> popisAutora = new Podatak<>("Autor", "idAutor", "nazivAutor","autor.idAutor",listaAutora);
-        Podatak<Izdavac> popisIzdavaca = new Podatak<>("Izdavač", "idIzdavac", "nazivIzdavaca","idIzdavac",listaIzdavaca);
-        Podatak<Object> godinaIzdanja = new Podatak<>("Godina izdanja", "godinaIzdanja", "","",new ArrayList<>());
+        sviPodaci.add(new Podatak("Naziv Knjige", "nazivKnjige","", "",""));;
+        sviPodaci.add(new Podatak("Autor", "idAutor", "tmpAutor","autor.idAutor","nazivAutora" ));
+        sviPodaci.add(new Podatak("Izdavač", "idIzdavac", "tmpIzdavac","izdavac.idIzdavac","nazivIzdavaca"  ));
+        sviPodaci.add(new Podatak("Godina izdanja", "godinaIzdanja", "","",""  ));
 
 
-        List<Object> sviPodaci = new ArrayList<>();
-        sviPodaci.add(nazivKnjige);
-        sviPodaci.add(popisAutora);
-//        sviPodaci.add(popisIzdavaca);
-        sviPodaci.add(godinaIzdanja);
-
-        List<String> item = new ArrayList<>();
-        item.add("nazivAutora");
-//        id.add("idIzdavac");
-
+        model.addAttribute("klasa", knjiga);
+        model.addAttribute("tmpIzdavac", listaIzdavaca);
+        model.addAttribute("tmpAutor", listaAutora);
+        model.addAttribute("listaPodataka", sviPodaci);
 
         model.addAttribute("naslov", "Knjiga");
         model.addAttribute("idPoljePodatka", "idKnjiga");
         model.addAttribute("nazivGumba", "Spremi");
         model.addAttribute("stranica", "Spremi");
 
-
-        model.addAttribute("klasa", knjiga);
-        model.addAttribute("item", item);
-        model.addAttribute("tmpIzdavac", listaIzdavaca);
-        model.addAttribute("tmpAutor", listaAutora);
-
-
-        model.addAttribute("listaPodataka", sviPodaci);
 
         // NOVI DIO KODA KRAJ
 

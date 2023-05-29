@@ -14,8 +14,6 @@
      }
 
 
-
-
     </style>
 </head>
 
@@ -56,49 +54,27 @@
         <!--        <input type="hidden" th:field="*{idPoljePodatka}">-->
         <input type="hidden" th:field="*{__${idPoljePodatka}__}">
 
+        <!--    START  for each     -->
 
         <div th:each="podatak : ${listaPodataka}" class="form-group">
 
 
             <label th:for="${podatak.polje}" th:text="${podatak.naziv}"></label>
 
-            <div th:if="${#lists.isEmpty(podatak.lista)}">
+            <div th:if="${#strings.isEmpty(podatak.model)}">
                 <input type="text" class="form-control" th:id="${podatak.polje}" th:field="*{__${podatak.polje}__}">
             </div>
 
+            <!--OVO JE TESTIRANJE -->
+            <div th:unless="${#strings.isEmpty(podatak.model)}">
+                <select class="form-control" th:id="${podatak.polje}" th:field="*{__${podatak.id}__}">
 
-            <div th:unless="${#lists.isEmpty(podatak.lista)}">
-
-<!--                <select class="form-control" th:id="${podatak.polje}" th:field="*{__${podatak.veza}__}">-->
-                <select class="form-control" th:id="${podatak.polje}" th:field="*{autor.idAutor}">
-
-<!--                    <option th:each="podatak : ${podatak.lista}" th:value="${podatak.veza}" th:text="${podatak.opcija}"></option>-->
-<!--                    <option th:each="podatak : ${podatak.lista}" th:value="1" th:text="autor"></option>-->
-
-                    <option th:each="podatak : ${podatak.lista}" th:value="1" th:text="$podatak[item]" ></option>
+                    <option th:each="item : ${__${podatak.model}__}" th:value="${item[podatak.polje]}" th:text="${item[podatak.opcija]}"></option>
 
                 </select>
-
-
-
-
             </div>
 
 
-        </div>
-
-        <div class="form-group">
-            <label for="idAutor">Autor:</label>
-            <select class="form-control" id="idAutor" th:field="*{autor.idAutor}"> <option th:each="autor : ${tmpAutor}" th:value="${autor.idAutor}"
-                        th:text="${autor.nazivAutora}"></option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="idIzdavac">Izdavač:</label>
-            <select class="form-control" id="idIzdavac" th:field="*{izdavac.idIzdavac}">
-                <option th:each="izdavac : ${tmpIzdavac}" th:value="${izdavac.idIzdavac}" th:text="${izdavac.nazivIzdavaca}"></option>
-            </select>
         </div>
 
 
@@ -106,6 +82,8 @@
             <button type="submit" class="btn btn-primary" th:text="${nazivGumba}"></button>
             <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
         </div>
+
+
     </form>
 </div>
 
@@ -118,13 +96,7 @@
   }
 
 
-
-
-
-
-
 </script>
-
 
 </body>
 </html>
