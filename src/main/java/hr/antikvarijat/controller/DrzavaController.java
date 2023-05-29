@@ -5,6 +5,7 @@ import hr.antikvarijat.model.Drzava;
 import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.repository.DrzavaRepository;
 import hr.antikvarijat.service.DrzavaService;
+import hr.antikvarijat.servis.Podatak;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,8 +52,17 @@ public class DrzavaController {
 
     @GetMapping("/new")
     public String showNewForm(Model model) {
-        model.addAttribute("drzava", new Drzava());
-        return "drzava_form";
+        List<Podatak> sviPodaci = new ArrayList<>();
+        sviPodaci.add(new Podatak("Naziv države:", "nazivDrzave","", "",""));;
+
+        model.addAttribute("klasa", new Drzava());
+        model.addAttribute("listaPodataka", sviPodaci);
+        model.addAttribute("naslov", "Država");
+        model.addAttribute("idPoljePodatka", "idDrzava");
+        model.addAttribute("nazivGumba", "Spremi");
+        model.addAttribute("stranica", "/drzave");
+
+        return "forma";
     }
 
     @PostMapping("/save")
@@ -64,9 +74,17 @@ public class DrzavaController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int idDrzava, Model model, RedirectAttributes ra) {
         try {
+
+            List<Podatak> sviPodaci = new ArrayList<>();
+            sviPodaci.add(new Podatak("Naziv države:", "nazivDrzave","", "",""));;
             Drzava drzava = drzavaService.getDrzavaById(idDrzava);
-            model.addAttribute("drzava", drzava);
-            return "drzava_form";
+            model.addAttribute("klasa", drzava);
+            model.addAttribute("listaPodataka", sviPodaci);
+            model.addAttribute("naslov", "Država");
+            model.addAttribute("idPoljePodatka", "idDrzava");
+            model.addAttribute("nazivGumba", "Spremi");
+            model.addAttribute("stranica", "/drzave");
+            return "forma";
         } catch (DrzavaNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/drzave";

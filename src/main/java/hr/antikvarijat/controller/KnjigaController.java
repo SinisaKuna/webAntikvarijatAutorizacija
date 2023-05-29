@@ -67,7 +67,7 @@ public class KnjigaController {
         Knjiga knjiga = new Knjiga();
 
         List<Podatak> sviPodaci = new ArrayList<>();
-        sviPodaci.add(new Podatak("Naziv Knjige:", "nazivKnjige","", "",""));;
+        sviPodaci.add(new Podatak("Naziv knjige:", "nazivKnjige","", "",""));;
         sviPodaci.add(new Podatak("Autor:", "idAutor", "tmpAutor","autor.idAutor","nazivAutora" ));
         sviPodaci.add(new Podatak("Izdavač:", "idIzdavac", "tmpIzdavac","izdavac.idIzdavac","nazivIzdavaca"  ));
         sviPodaci.add(new Podatak("Godina izdanja:", "godinaIzdanja", "","",""  ));
@@ -81,8 +81,8 @@ public class KnjigaController {
         model.addAttribute("klasa", knjiga);
         model.addAttribute("tmpIzdavac", listaIzdavaca);
         model.addAttribute("tmpAutor", listaAutora);
-        model.addAttribute("listaPodataka", sviPodaci);
 
+        model.addAttribute("listaPodataka", sviPodaci);
         model.addAttribute("naslov", "Knjiga");
         model.addAttribute("idPoljePodatka", "idKnjiga");
         model.addAttribute("nazivGumba", "Spremi");
