@@ -67,11 +67,15 @@ public class KnjigaController {
         Knjiga knjiga = new Knjiga();
 
         List<Podatak> sviPodaci = new ArrayList<>();
-
-        sviPodaci.add(new Podatak("Naziv Knjige", "nazivKnjige","", "",""));;
-        sviPodaci.add(new Podatak("Autor", "idAutor", "tmpAutor","autor.idAutor","nazivAutora" ));
-        sviPodaci.add(new Podatak("Izdavač", "idIzdavac", "tmpIzdavac","izdavac.idIzdavac","nazivIzdavaca"  ));
-        sviPodaci.add(new Podatak("Godina izdanja", "godinaIzdanja", "","",""  ));
+        sviPodaci.add(new Podatak("Naziv Knjige:", "nazivKnjige","", "",""));;
+        sviPodaci.add(new Podatak("Autor:", "idAutor", "tmpAutor","autor.idAutor","nazivAutora" ));
+        sviPodaci.add(new Podatak("Izdavač:", "idIzdavac", "tmpIzdavac","izdavac.idIzdavac","nazivIzdavaca"  ));
+        sviPodaci.add(new Podatak("Godina izdanja:", "godinaIzdanja", "","",""  ));
+        sviPodaci.add(new Podatak("Broj stranica:", "brojStranica", "","",""  ));
+        sviPodaci.add(new Podatak("Vrsta uveza:", "vrstaUveza", "","",""  ));
+        sviPodaci.add(new Podatak("Dimenzije:", "dimenzija", "","",""  ));
+        sviPodaci.add(new Podatak("Jezik / pismo:", "jezik", "","",""  ));
+        sviPodaci.add(new Podatak("Prodajna cijena:", "cijenaProdaje", "","",""  ));
 
 
         model.addAttribute("klasa", knjiga);
@@ -82,12 +86,7 @@ public class KnjigaController {
         model.addAttribute("naslov", "Knjiga");
         model.addAttribute("idPoljePodatka", "idKnjiga");
         model.addAttribute("nazivGumba", "Spremi");
-        model.addAttribute("stranica", "Spremi");
-
-
-        // NOVI DIO KODA KRAJ
-
-
+        model.addAttribute("stranica", "/knjige");
 
         return "forma";
     }
@@ -99,10 +98,37 @@ public class KnjigaController {
             List<Autor> listaAutora = autorService.getAllAutori();
             List<Izdavac> listaIzdavaca = izdavacService.getAllIzdavaci();
             Knjiga knjiga = knjigaService.dohvatiKnjiguPoId(idKnjiga);
-            model.addAttribute("knjiga", knjiga);
-            model.addAttribute("izdavac", listaIzdavaca);
-            model.addAttribute("autor", listaAutora);
-            return "knjiga_form";
+
+
+            List<Podatak> sviPodaci = new ArrayList<>();
+            sviPodaci.add(new Podatak("Naziv Knjige:", "nazivKnjige","", "",""));;
+            sviPodaci.add(new Podatak("Autor:", "idAutor", "tmpAutor","autor.idAutor","nazivAutora" ));
+            sviPodaci.add(new Podatak("Izdavač:", "idIzdavac", "tmpIzdavac","izdavac.idIzdavac","nazivIzdavaca"  ));
+            sviPodaci.add(new Podatak("Godina izdanja:", "godinaIzdanja", "","",""  ));
+            sviPodaci.add(new Podatak("Broj stranica:", "brojStranica", "","",""  ));
+            sviPodaci.add(new Podatak("Vrsta uveza:", "vrstaUveza", "","",""  ));
+            sviPodaci.add(new Podatak("Dimenzije:", "dimenzija", "","",""  ));
+            sviPodaci.add(new Podatak("Jezik / pismo:", "jezik", "","",""  ));
+            sviPodaci.add(new Podatak("Prodajna cijena:", "cijenaProdaje", "","",""  ));
+
+
+            model.addAttribute("klasa", knjiga);
+            model.addAttribute("tmpIzdavac", listaIzdavaca);
+            model.addAttribute("tmpAutor", listaAutora);
+            model.addAttribute("listaPodataka", sviPodaci);
+
+
+            model.addAttribute("naslov", "Knjiga");
+            model.addAttribute("idPoljePodatka", "idKnjiga");
+            model.addAttribute("nazivGumba", "Spremi");
+            model.addAttribute("stranica", "/knjige");
+
+
+
+
+
+
+            return "forma";
         } catch (KnjigaNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/knjige";

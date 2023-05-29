@@ -45,7 +45,7 @@
     <h4>Knjiga</h4>
     <hr>
 
-    <form th:object="${knjiga}" th:action="@{/knjige/save}" method="post">
+    <form th:object="${knjiga}" th:action="@{ /knjige /save}" method="post">
 
         <input type="hidden" th:field="*{idKnjiga}">
 
@@ -111,5 +111,7 @@
   }
 
 </script>
+
+
 </body>
 </html>
