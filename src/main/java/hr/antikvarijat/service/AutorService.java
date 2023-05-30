@@ -8,7 +8,10 @@ import hr.antikvarijat.repository.KnjigaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.Collator;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class AutorService {
@@ -27,6 +30,16 @@ public class AutorService {
             autor.setNazivDrzave(null);
         }
         return  lista;
+    }
+
+    public List<Autor> getSortedAutor() {
+        List<Autor> lista =  autorRepository.findAll();
+        for (Autor grad : lista) {
+            grad.setNazivDrzave(null);
+        }
+        Collator collator = Collator.getInstance(new Locale("hr", "HR"));
+        Collections.sort(lista, (d1, d2) -> collator.compare(d1.getNazivAutora(), d2.getNazivAutora()));
+        return lista;
     }
 
     public Autor getAutorById(int id) {

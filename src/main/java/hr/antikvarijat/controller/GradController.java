@@ -36,11 +36,11 @@ public class GradController {
 
         List<Kolona> listeKolona = new ArrayList<>();
         listeKolona.add(new Kolona("ID","idGrad","idGrad"));
-        listeKolona.add(new Kolona("Poštanski broj","postanskiBroj","idGrad"));
         listeKolona.add(new Kolona("Naziv grada","nazivGrada","idGrad"));
+        listeKolona.add(new Kolona("Poštanski broj","postanskiBroj","idGrad"));
         listeKolona.add(new Kolona("Naziv države","nazivDrzave","idGrad"));
 
-        List<Grad> listGradovi = gradService.getAllGradovi();
+        List<Grad> listGradovi = gradService.getSortedGrad();
         model.addAttribute("listaPodataka", listGradovi);
 
         model.addAttribute("naslov", "Popis gradova");
@@ -82,6 +82,12 @@ public class GradController {
     @GetMapping("/new")
     public String showForm(Model model) {
 
+        List<Podatak> sviPodaci = new ArrayList<>();
+        sviPodaci.add(new Podatak("Poštanski broj:", "postanskiBroj","", "",""));;
+        sviPodaci.add(new Podatak("Naziv grada:", "nazivGrada", "","",""  ));
+        sviPodaci.add(new Podatak("Država:", "idDrzava", "tmpDrzava","drzava.idDrzava","nazivDrzave" ));
+
+
         Drzava drzava = new Drzava();
         List<Drzava> listaDrzava = drzavaService.getSortedDrzave();
 
@@ -89,9 +95,15 @@ public class GradController {
 
 
         // Set other necessary attributes if needed
-        model.addAttribute("grad", grad);
-        model.addAttribute("drzave", listaDrzava);
-        return "grad_form";
+        model.addAttribute("klasa", grad);
+        model.addAttribute("tmpDrzava", listaDrzava);
+
+        model.addAttribute("listaPodataka", sviPodaci);
+        model.addAttribute("naslov", "Grad");
+        model.addAttribute("idPoljePodatka", "idGrad");
+        model.addAttribute("nazivGumba", "Spremi");
+        model.addAttribute("stranica", "/gradovi");
+        return "forma";
     }
 
 
@@ -99,11 +111,24 @@ public class GradController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int idGrad, Model model, RedirectAttributes ra) {
         try {
+
+            List<Podatak> sviPodaci = new ArrayList<>();
+            sviPodaci.add(new Podatak("Poštanski broj:", "postanskiBroj","", "",""));;
+            sviPodaci.add(new Podatak("Naziv grada:", "nazivGrada", "","",""  ));
+            sviPodaci.add(new Podatak("Država:", "idDrzava", "tmpDrzava","drzava.idDrzava","nazivDrzave" ));
+
             List<Drzava> listaDrzava = drzavaService.getAllDrzave();
             Grad grad = gradService.getGradById(idGrad);
-            model.addAttribute("grad", grad);
-            model.addAttribute("drzave", listaDrzava);
-            return "grad_form";
+            model.addAttribute("klasa", grad);
+            model.addAttribute("tmpDrzava", listaDrzava);
+
+            model.addAttribute("listaPodataka", sviPodaci);
+            model.addAttribute("naslov", "Grad");
+            model.addAttribute("idPoljePodatka", "idGrad");
+            model.addAttribute("nazivGumba", "Ažuriraj");
+            model.addAttribute("stranica", "/gradovi");
+
+            return "forma";
         } catch (GradNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/gradovi";

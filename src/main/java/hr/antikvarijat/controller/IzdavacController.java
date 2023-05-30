@@ -7,6 +7,7 @@ import hr.antikvarijat.model.Izdavac;
 import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.service.GradService;
 import hr.antikvarijat.service.IzdavacService;
+import hr.antikvarijat.servis.Podatak;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +39,7 @@ public class IzdavacController {
         listeKolona.add(new Kolona("Naziv grada","nazivGrada","idIzdavac"));
 
 
-        List<Izdavac> listIzdavaci = izdavacService.getAllIzdavaci();
+        List<Izdavac> listIzdavaci = izdavacService.getSortedIzdavac();
         model.addAttribute("listaPodataka", listIzdavaci);
 
 
@@ -55,12 +56,25 @@ public class IzdavacController {
 
     @GetMapping("/new")
     public String showForm(Model model) {
+
+        List<Podatak> sviPodaci = new ArrayList<>();
+        sviPodaci.add(new Podatak("Naziv izdavača:", "nazivIzdavaca","", "",""));;
+        sviPodaci.add(new Podatak("Grad:", "idGrad", "tmpGrad","grad.idGrad","nazivGrada" ));
+
         Grad grad = new Grad();
-        List<Grad> listaGradova = gradService.getAllGradovi();
+        List<Grad> listaGradova = gradService.getSortedGrad();
         Izdavac izdavac = new Izdavac();
-        model.addAttribute("izdavac", izdavac);
-        model.addAttribute("gradovi", listaGradova);
-        return "izdavac_form";
+        model.addAttribute("klasa", izdavac);
+        model.addAttribute("tmpGrad", listaGradova);
+
+        model.addAttribute("listaPodataka", sviPodaci);
+        model.addAttribute("naslov", "Partner");
+        model.addAttribute("idPoljePodatka", "idIzdavac");
+        model.addAttribute("nazivGumba", "Spremi");
+        model.addAttribute("stranica", "/izdavaci");
+
+
+        return "forma";
     }
 
     @PostMapping("/save")
@@ -74,11 +88,24 @@ public class IzdavacController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int idIzdavac, Model model, RedirectAttributes ra) {
         try {
-            List<Grad> listaGradova = gradService.getAllGradovi();
+
+            List<Podatak> sviPodaci = new ArrayList<>();
+            sviPodaci.add(new Podatak("Naziv izdavača:", "nazivIzdavaca","", "",""));;
+            sviPodaci.add(new Podatak("Grad:", "idGrad", "tmpGrad","grad.idGrad","nazivGrada" ));
+
+            List<Grad> listaGradova = gradService.getSortedGrad();
             Izdavac izdavac = izdavacService.getIzdavacById(idIzdavac);
-            model.addAttribute("izdavac", izdavac);
-            model.addAttribute("gradovi", listaGradova);
-            return "izdavac_form";
+            model.addAttribute("klasa", izdavac);
+            model.addAttribute("tmpGrad", listaGradova);
+
+            model.addAttribute("listaPodataka", sviPodaci);
+            model.addAttribute("naslov", "Partner");
+            model.addAttribute("idPoljePodatka", "idIzdavac");
+            model.addAttribute("nazivGumba", "Ažuriraj");
+            model.addAttribute("stranica", "/izdavaci");
+
+            return "forma";
+
         } catch (IzdavacNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/izdavaci";

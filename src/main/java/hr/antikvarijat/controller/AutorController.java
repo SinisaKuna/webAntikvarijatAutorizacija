@@ -6,6 +6,7 @@ import hr.antikvarijat.model.Drzava;
 import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.service.AutorService;
 import hr.antikvarijat.service.DrzavaService;
+import hr.antikvarijat.servis.Podatak;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,15 +34,15 @@ public class AutorController {
 
         List<Kolona> listeKolona = new ArrayList<>();
 
-        listeKolona.add(new Kolona("ID","idAutor","idAutor"));
-        listeKolona.add(new Kolona("Naziv autora","nazivAutora","idAutor"));
-        listeKolona.add(new Kolona("Naziv države","nazivDrzave","idAutor"));
+        listeKolona.add(new Kolona("ID", "idAutor", "idAutor"));
+        listeKolona.add(new Kolona("Naziv autora", "nazivAutora", "idAutor"));
+        listeKolona.add(new Kolona("Naziv države", "nazivDrzave", "idAutor"));
 
-        List<Autor> listAutori = autorService.getAllAutori();
+        List<Autor> listAutori = autorService.getSortedAutor();
         model.addAttribute("listaPodataka", listAutori);
 
         model.addAttribute("naslov", "Popis autora");
-        model.addAttribute("dodajLink", "/autori/new" );
+        model.addAttribute("dodajLink", "/autori/new");
         model.addAttribute("urediLink", "/autori/edit/{id}");
         model.addAttribute("obrisiLink", "/autori/delete/{id}");
         model.addAttribute("listeKolona", listeKolona);
@@ -51,13 +52,25 @@ public class AutorController {
 
     @GetMapping("/new")
     public String showForm(Model model) {
+
+        List<Podatak> sviPodaci = new ArrayList<>();
+        sviPodaci.add(new Podatak("Naziv autora:", "nazivAutora", "", "", ""));
+        sviPodaci.add(new Podatak("Država:", "idDrzava", "tmpDrzava", "drzava.idDrzava", "nazivDrzave"));
+
         Drzava drzava = new Drzava();
-//        List<Drzava> listaDrzava = drzavaService.getAllDrzave();
         List<Drzava> listaDrzava = drzavaService.getSortedDrzave();
         Autor autor = new Autor();
-        model.addAttribute("autor", autor);
-        model.addAttribute("drzave", listaDrzava);
-        return "autor_form";
+        model.addAttribute("klasa", autor);
+        model.addAttribute("tmpDrzava", listaDrzava);
+
+
+        model.addAttribute("listaPodataka", sviPodaci);
+        model.addAttribute("naslov", "Autor");
+        model.addAttribute("idPoljePodatka", "idAutor");
+        model.addAttribute("nazivGumba", "Spremi");
+        model.addAttribute("stranica", "/autori");
+
+        return "forma";
     }
 
     @PostMapping("/save")
@@ -71,27 +84,36 @@ public class AutorController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int idAutor, Model model, RedirectAttributes ra) {
         try {
+
+            List<Podatak> sviPodaci = new ArrayList<>();
+            sviPodaci.add(new Podatak("Naziv autora:", "nazivAutora", "", "", ""));
+            sviPodaci.add(new Podatak("Država:", "idDrzava", "tmpDrzava", "drzava.idDrzava", "nazivDrzave"));
+
             List<Drzava> listaDrzava = drzavaService.getAllDrzave();
             Autor autor = autorService.getAutorById(idAutor);
-            model.addAttribute("autor", autor);
-            model.addAttribute("drzave", listaDrzava);
-            return "autor_form";
+            model.addAttribute("klasa", autor);
+            model.addAttribute("tmpDrzava", listaDrzava);
+
+
+            model.addAttribute("listaPodataka", sviPodaci);
+            model.addAttribute("naslov", "Autor");
+            model.addAttribute("idPoljePodatka", "idAutor");
+            model.addAttribute("nazivGumba", "Ažuriraj");
+            model.addAttribute("stranica", "/autori");
+
+            return "forma";
+
         } catch (AutorNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/autori";
         }
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteAutor(@PathVariable int id) {
-//        autorService.deleteAutor(id);
-//        return "redirect:/autori";
-//    }
 
     @GetMapping("/delete/{id}")
     public String deleteAutor(@PathVariable int id, RedirectAttributes ra) {
         try {
-            if ( autorService.hasKnjiga(id) ) {
+            if (autorService.hasKnjiga(id)) {
                 ra.addFlashAttribute("message", "Nemoguće izbrisati autora jer postoje povezani zapisi u drugim tablicama.");
             } else {
                 autorService.deleteAutor(id);

@@ -38,7 +38,7 @@ public class DrzavaController {
         listeKolona.add(new Kolona("Naziv države","nazivDrzave","idDrzava"));
 
 
-        List<Drzava> listDrzave = drzavaService.getAllDrzave();
+        List<Drzava> listDrzave = drzavaService.getSortedDrzave();
         model.addAttribute("listaPodataka", listDrzave);
 
         model.addAttribute("naslov", "Popis država");
@@ -82,7 +82,7 @@ public class DrzavaController {
             model.addAttribute("listaPodataka", sviPodaci);
             model.addAttribute("naslov", "Država");
             model.addAttribute("idPoljePodatka", "idDrzava");
-            model.addAttribute("nazivGumba", "Spremi");
+            model.addAttribute("nazivGumba", "Ažuriraj");
             model.addAttribute("stranica", "/drzave");
             return "forma";
         } catch (DrzavaNotFoundException e) {

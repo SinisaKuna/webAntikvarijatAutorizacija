@@ -8,10 +8,8 @@ import hr.antikvarijat.repository.DrzavaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.text.Collator;
+import java.util.*;
 
 @Service
 public class DrzavaService {
@@ -34,7 +32,10 @@ public class DrzavaService {
     public List<Drzava> getSortedDrzave() {
 
         List<Drzava> drzave = getAllDrzave();
-        Collections.sort(drzave, (d1, d2) -> d1.getNazivDrzave().compareToIgnoreCase(d2.getNazivDrzave()));
+//        Collections.sort(drzave, (d1, d2) -> d1.getNazivDrzave().compareToIgnoreCase(d2.getNazivDrzave()));
+        Collator collator = Collator.getInstance(new Locale("hr", "HR"));
+        Collections.sort(drzave, (d1, d2) -> collator.compare(d1.getNazivDrzave(), d2.getNazivDrzave()));
+
         return drzave;
     }
 

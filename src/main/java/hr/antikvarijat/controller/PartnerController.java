@@ -8,6 +8,7 @@ import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.model.Partner;
 import hr.antikvarijat.service.GradService;
 import hr.antikvarijat.service.PartnerService;
+import hr.antikvarijat.servis.Podatak;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,7 @@ public class PartnerController {
               <td th:text="${partner.grad.nazivGrada}"></td>
          */
 
-        List<Partner> listPartneri = partnerService.getAllPartners();
+        List<Partner> listPartneri = partnerService.getSortedPartner();
         model.addAttribute("listaPodataka", listPartneri);
 
         model.addAttribute("naslov", "Popis partnera");
@@ -67,11 +68,28 @@ public class PartnerController {
 
     @GetMapping("/new")
     public String showForm(Model model) {
-        List<Grad> listaGradova = gradService.getAllGradovi();
+
+
+        List<Podatak> sviPodaci = new ArrayList<>();
+        sviPodaci.add(new Podatak("Naziv partnera:", "nazivPartnera","", "",""));;
+        sviPodaci.add(new Podatak("Ulica i broj:", "ulicaBroj", "","",""  ));
+        sviPodaci.add(new Podatak("Grad:", "idGrad", "tmpGrad","grad.idGrad","nazivGrada" ));
+        sviPodaci.add(new Podatak("Oib:", "oib","", "",""));;
+        sviPodaci.add(new Podatak("Mail adresa:", "email","", "",""));;
+        sviPodaci.add(new Podatak("Broj telefona:", "telefon","", "",""));;
+
+        List<Grad> listaGradova = gradService.getSortedGrad();
         Partner partner = new Partner();
-        model.addAttribute("partner", partner);
-        model.addAttribute("gradovi", listaGradova);
-        return "partner_form";
+        model.addAttribute("klasa", partner);
+        model.addAttribute("tmpGrad", listaGradova);
+
+        model.addAttribute("listaPodataka", sviPodaci);
+        model.addAttribute("naslov", "Partner");
+        model.addAttribute("idPoljePodatka", "idPartner");
+        model.addAttribute("nazivGumba", "Spremi");
+        model.addAttribute("stranica", "/partneri");
+
+        return "forma";
     }
 
     @PostMapping("/save")
@@ -85,11 +103,27 @@ public class PartnerController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int idPartner, Model model, RedirectAttributes ra) {
         try {
-            List<Grad> listaGradova = gradService.getAllGradovi();
+
+            List<Podatak> sviPodaci = new ArrayList<>();
+            sviPodaci.add(new Podatak("Naziv partnera:", "nazivPartnera","", "",""));;
+            sviPodaci.add(new Podatak("Ulica i broj:", "ulicaBroj", "","",""  ));
+            sviPodaci.add(new Podatak("Grad:", "idGrad", "tmpGrad","grad.idGrad","nazivGrada" ));
+            sviPodaci.add(new Podatak("Oib:", "oib","", "",""));;
+            sviPodaci.add(new Podatak("Mail adresa:", "email","", "",""));;
+            sviPodaci.add(new Podatak("Broj telefona:", "telefon","", "",""));;
+
+            List<Grad> listaGradova = gradService.getSortedGrad();
             Partner partner = partnerService.getPartnerById(idPartner);
-            model.addAttribute("partner", partner);
-            model.addAttribute("gradovi", listaGradova);
-            return "partner_form";
+            model.addAttribute("klasa", partner);
+            model.addAttribute("tmpGrad", listaGradova);
+
+            model.addAttribute("listaPodataka", sviPodaci);
+            model.addAttribute("naslov", "Partner");
+            model.addAttribute("idPoljePodatka", "idPartner");
+            model.addAttribute("nazivGumba", "Ažuriraj");
+            model.addAttribute("stranica", "/partneri");
+
+            return "forma";
         } catch (PartnerNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/partneri";

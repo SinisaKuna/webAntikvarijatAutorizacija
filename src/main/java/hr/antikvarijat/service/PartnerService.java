@@ -10,7 +10,10 @@ import hr.antikvarijat.repository.ProdajaZaglavljeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.Collator;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class PartnerService {
@@ -30,6 +33,19 @@ public class PartnerService {
         }
         return  lista;
     }
+
+    public List<Partner> getSortedPartner() {
+        List<Partner> lista =  partnerRepository.findAll();
+        for (Partner partner : lista) {
+            partner.setNazivGrada(null);
+        }
+        Collator collator = Collator.getInstance(new Locale("hr", "HR"));
+        Collections.sort(lista, (d1, d2) -> collator.compare(d1.getNazivPartnera(), d2.getNazivPartnera()));
+        return lista;
+    }
+
+
+
 
     public Partner getPartnerById(int id) {
         return partnerRepository.findById(id)

@@ -1,12 +1,16 @@
 package hr.antikvarijat.service;
 
 import hr.antikvarijat.exception.KnjigaNotFoundException;
+import hr.antikvarijat.model.Grad;
 import hr.antikvarijat.model.Knjiga;
 import hr.antikvarijat.repository.KnjigaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.Collator;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class KnjigaService {
@@ -34,7 +38,16 @@ public class KnjigaService {
         }
         return  listaKnjiga;
     }
-
+    public List<Knjiga> getSortedKnjiga() {
+        List<Knjiga> lista =  knjigaRepository.findAll();
+        for (Knjiga knjiga : lista) {
+            knjiga.setNazivAutora(null);
+            knjiga.setNazivIzdavaca(null);
+        }
+        Collator collator = Collator.getInstance(new Locale("hr", "HR"));
+        Collections.sort(lista, (d1, d2) -> collator.compare(d1.getNazivKnjige(), d2.getNazivKnjige()));
+        return lista;
+    }
 
     public void obrisiKnjigu(int id) {
         knjigaRepository.deleteById(id);

@@ -44,7 +44,7 @@ public class KnjigaController {
         listeKolona.add(new Kolona("Godina izdanja", "godinaIzdanja", "idKnjiga"));
         listeKolona.add(new Kolona("Prodajna cijena", "cijenaProdaje", "idKnjiga"));
 
-        List<Knjiga> listaPodataka = knjigaService.dohvatiSveKnjige();
+        List<Knjiga> listaPodataka = knjigaService.getSortedKnjiga();
 
         model.addAttribute("naslov", "Popis knjiga");
         model.addAttribute("dodajLink", "/knjige/new");
@@ -61,9 +61,9 @@ public class KnjigaController {
     @GetMapping("/new")
     public String showForm(Model model) {
         Autor autor = new Autor();
-        List<Autor> listaAutora = autorService.getAllAutori();
+        List<Autor> listaAutora = autorService.getSortedAutor();
         Izdavac izdavac = new Izdavac();
-        List<Izdavac> listaIzdavaca = izdavacService.getAllIzdavaci();
+        List<Izdavac> listaIzdavaca = izdavacService.getSortedIzdavac();
         Knjiga knjiga = new Knjiga();
 
         List<Podatak> sviPodaci = new ArrayList<>();
@@ -95,8 +95,8 @@ public class KnjigaController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int idKnjiga, Model model, RedirectAttributes ra) {
         try {
-            List<Autor> listaAutora = autorService.getAllAutori();
-            List<Izdavac> listaIzdavaca = izdavacService.getAllIzdavaci();
+            List<Autor> listaAutora = autorService.getSortedAutor();
+            List<Izdavac> listaIzdavaca = izdavacService.getSortedIzdavac();
             Knjiga knjiga = knjigaService.dohvatiKnjiguPoId(idKnjiga);
 
 
@@ -120,7 +120,7 @@ public class KnjigaController {
 
             model.addAttribute("naslov", "Knjiga");
             model.addAttribute("idPoljePodatka", "idKnjiga");
-            model.addAttribute("nazivGumba", "Spremi");
+            model.addAttribute("nazivGumba", "Ažuriraj");
             model.addAttribute("stranica", "/knjige");
 
 

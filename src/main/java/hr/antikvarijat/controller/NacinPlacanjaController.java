@@ -4,6 +4,8 @@ import hr.antikvarijat.exception.NacinPlacanjaNotFoundException;
 import hr.antikvarijat.servis.Kolona;
 import hr.antikvarijat.model.NacinPlacanja;
 import hr.antikvarijat.service.NacinPlacanjaService;
+import hr.antikvarijat.servis.OznakaNacinaPlacanja;
+import hr.antikvarijat.servis.Podatak;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,8 +55,29 @@ public class NacinPlacanjaController {
 
     @GetMapping("/new")
     public String showNewForm(Model model) {
-        model.addAttribute("nacinPlacanja", new NacinPlacanja());
-        return "nacin_placanja_form";
+
+        List<Podatak> sviPodaci = new ArrayList<>();
+        sviPodaci.add(new Podatak("Naziv načina plaćanja:", "nazivNacinaPlacanja", "", "", ""));
+        sviPodaci.add(new Podatak("Oznaka:", "oznakaNacinaPlacanja", "tmpOznakaNacinaPlacanja", "oznakaNacinaPlacanja", "opis"));
+
+        List<OznakaNacinaPlacanja> tmpNacinPlacanja = new ArrayList<>();
+        tmpNacinPlacanja.add(new OznakaNacinaPlacanja("G","Gotovina"));
+        tmpNacinPlacanja.add(new OznakaNacinaPlacanja("K","Kartica"));
+        tmpNacinPlacanja.add(new OznakaNacinaPlacanja("C","Ček tekućeg računa"));
+        tmpNacinPlacanja.add(new OznakaNacinaPlacanja("O","Ostalo"));
+
+        model.addAttribute("klasa", new NacinPlacanja());
+        model.addAttribute("tmpOznakaNacinaPlacanja", tmpNacinPlacanja);
+
+
+        model.addAttribute("listaPodataka", sviPodaci);
+        model.addAttribute("naslov", "Način plaćanja");
+        model.addAttribute("idPoljePodatka", "idNacinPlacanja");
+        model.addAttribute("nazivGumba", "Spremi");
+        model.addAttribute("stranica", "/nacini_placanja");
+
+
+        return "forma";
     }
 
     @PostMapping("/save")
@@ -66,9 +89,30 @@ public class NacinPlacanjaController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int idNacinPlacanja, Model model, RedirectAttributes ra) {
         try {
+
+            List<Podatak> sviPodaci = new ArrayList<>();
+            sviPodaci.add(new Podatak("Naziv načina plaćanja:", "nazivNacinaPlacanja", "", "", ""));
+            sviPodaci.add(new Podatak("Oznaka:", "oznakaNacinaPlacanja", "tmpOznakaNacinaPlacanja", "oznakaNacinaPlacanja", "opis"));
+
+            List<OznakaNacinaPlacanja> tmpNacinPlacanja = new ArrayList<>();
+            tmpNacinPlacanja.add(new OznakaNacinaPlacanja("G","Gotovina"));
+            tmpNacinPlacanja.add(new OznakaNacinaPlacanja("K","Kartica"));
+            tmpNacinPlacanja.add(new OznakaNacinaPlacanja("C","Ček tekućeg računa"));
+            tmpNacinPlacanja.add(new OznakaNacinaPlacanja("O","Ostalo"));
+
+
             NacinPlacanja nacinPlacanja = nacinPlacanjaService.getNacinPlacanjaById(idNacinPlacanja);
-            model.addAttribute("nacinPlacanja", nacinPlacanja);
-            return "nacin_placanja_form";
+            model.addAttribute("klasa", nacinPlacanja);
+            model.addAttribute("tmpOznakaNacinaPlacanja", tmpNacinPlacanja);
+
+            model.addAttribute("listaPodataka", sviPodaci);
+            model.addAttribute("naslov", "Način plaćanja");
+            model.addAttribute("idPoljePodatka", "idNacinPlacanja");
+            model.addAttribute("nazivGumba", "Ažuriraj");
+            model.addAttribute("stranica", "/nacini_placanja");
+
+            return "forma";
+
         } catch (NacinPlacanjaNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/nacini_placanja";
