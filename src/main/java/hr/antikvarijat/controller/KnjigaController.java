@@ -46,6 +46,7 @@ public class KnjigaController {
 
         List<Knjiga> listaPodataka = knjigaService.getSortedKnjiga();
 
+
         model.addAttribute("naslov", "Popis knjiga");
         model.addAttribute("dodajLink", "/knjige/new");
         model.addAttribute("urediLink", "/knjige/edit/{id}");
