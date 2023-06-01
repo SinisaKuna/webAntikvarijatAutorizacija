@@ -31,6 +31,13 @@ public class MainController {
 
     @GetMapping("/otkup")
     // ZA SADA U FAZI IZRADE PRODAJE
-    public String showFazaIzradeProdaje() { return "redirect:prodaja_stavke"; }
+    public String showFazaIzradeProdaje(RedirectAttributes ra) {
+        ra.addFlashAttribute("message", "Izrada stranice u tijeku...");
+        return "redirect:antikvarijat"; }
+
+
+    @GetMapping("/prodaja")
+    // ZA SADA U FAZI IZRADE PRODAJE
+    public String showProdaja() { return "redirect:prodaja_stavke"; }
 
 }

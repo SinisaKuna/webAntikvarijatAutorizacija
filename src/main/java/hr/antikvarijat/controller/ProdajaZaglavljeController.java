@@ -6,6 +6,7 @@ import hr.antikvarijat.exception.ProdajaZaglavljeNotFoundException;
 import hr.antikvarijat.model.Partner;
 import hr.antikvarijat.model.NacinPlacanja;
 import hr.antikvarijat.model.ProdajaZaglavlje;
+import hr.antikvarijat.service.KnjigaService;
 import hr.antikvarijat.service.PartnerService;
 import hr.antikvarijat.service.NacinPlacanjaService;
 import hr.antikvarijat.service.ProdajaZaglavljeService;
@@ -45,7 +46,6 @@ public class ProdajaZaglavljeController {
     @GetMapping("")
     public String showProdajaZaglavljeList(Model model) {
         List<ProdajaZaglavlje> listaProdajaZaglavlja = prodajaZaglavljeService.getAllProdajaZaglavlje();
-
         model.addAttribute("listaProdajaZaglavlja", listaProdajaZaglavlja);
         return "prodaja_zaglavlja";
     }
@@ -65,14 +65,11 @@ public class ProdajaZaglavljeController {
         List<Partner> listaPartnera = partnerService.getAllPartners();
         List<NacinPlacanja> listaNacinaPlacanja = nacinPlacanjaService.getAllNacinPlacanja();
 
-//        List<UserDto> listaUserDTO = userService.findAllUsers();
-
         User user = userService.findByEmail("");
 
         model.addAttribute("prodajaZaglavlje", prodajaZaglavlje);
         model.addAttribute("partner", listaPartnera);
         model.addAttribute("nacinPlacanja", listaNacinaPlacanja);
-//        model.addAttribute("user", listaUserDTO);
 
         return "prodaja_zaglavlje_form";
     }

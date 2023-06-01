@@ -49,6 +49,8 @@ public class KnjigaService {
         return lista;
     }
 
+
+
     public void obrisiKnjigu(int id) {
         knjigaRepository.deleteById(id);
     }
