@@ -1,6 +1,7 @@
 package hr.antikvarijat.model;
 
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
 @Entity
@@ -73,5 +74,17 @@ public class ProdajaStavka {
 
     public void setCijenaProdaje(BigDecimal cijenaProdaje) {
         this.cijenaProdaje = cijenaProdaje;
+    }
+
+//    public int getIdProdajaZaglavlje() {
+//        return prodajaZaglavlje.getIdProdajaZaglavlje();
+//    }
+
+
+    public int getIdProdajaZaglavlje() {
+        if (prodajaZaglavlje != null) {
+            return prodajaZaglavlje.getIdProdajaZaglavlje();
+        }
+        return 0; // ili neku drugu vrijednost koju želite vratiti ako je prodajaZaglavlje null
     }
 }

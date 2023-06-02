@@ -42,16 +42,16 @@
 <div class="container mt-4">
 
     <br>
-    <h4>Prodaja [prodaja_forma]</h4>
+    <h4>Prodaja [prodaja_stavka_form]</h4>
     <hr>
 
-    <form th:object="${prodajaStavka}" th:action="@{/prodaja_stavke/save_stavka}" method="post">
+    <form th:object="${prodajaStavka}" th:action="@{/prodaja_stavke/save}" method="post">
 
         <input type="hidden" th:field="*{idProdajaStavka}">
 
         <input type="hidden" th:field="*{prodajaZaglavlje.idProdajaZaglavlje}">
 
-          <!--OVO JE OK-->
+        <!--OVO JE OK-->
 
         <div class="form-group">
             <label for="idKnjiga">Knjiga:</label>
@@ -83,7 +83,7 @@
 
 <script type="text/javascript">
   function cancelForm() {
-    window.location = "[[@{/prodaja_stavke}]]";
+    window.location = "[[@{/prodaja_zaglavlja}]]";
   }
 </script>
 

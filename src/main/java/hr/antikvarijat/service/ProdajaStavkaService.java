@@ -33,4 +33,7 @@ public class ProdajaStavkaService {
     public void deleteProdajaStavka(int id) {
         prodajaStavkaRepository.deleteById(id);
     }
+
+
+
 }

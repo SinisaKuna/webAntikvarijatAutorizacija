@@ -56,4 +56,10 @@ public class ProdajaZaglavljeService {
     public boolean hasProdajaZaglavlje(int id) {
         return prodajaRepository.existsByPartnerIdPartner(id);
     }
+
+    public int findMaxIdProdajaZaglavlje() {
+        return prodajaZaglavljeRepository.findMaxIdProdajaZaglavlje();
+    }
+
+
 }

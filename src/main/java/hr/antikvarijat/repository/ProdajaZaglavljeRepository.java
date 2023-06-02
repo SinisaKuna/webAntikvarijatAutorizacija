@@ -1,8 +1,8 @@
 package hr.antikvarijat.repository;
 
 import hr.antikvarijat.model.ProdajaZaglavlje;
-import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -10,4 +10,8 @@ public interface ProdajaZaglavljeRepository extends JpaRepository<ProdajaZaglavl
 
 
     boolean existsByPartnerIdPartner(int id);
+
+    @Query("SELECT MAX(p.idProdajaZaglavlje) FROM ProdajaZaglavlje p")
+    int findMaxIdProdajaZaglavlje();
+
 }

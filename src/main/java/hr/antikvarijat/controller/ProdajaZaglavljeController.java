@@ -1,15 +1,10 @@
 package hr.antikvarijat.controller;
 
 import hr.antikvarijat.dto.UserDto;
-import hr.antikvarijat.model.User;
+import hr.antikvarijat.exception.ProdajaStavkaNotFoundException;
+import hr.antikvarijat.model.*;
 import hr.antikvarijat.exception.ProdajaZaglavljeNotFoundException;
-import hr.antikvarijat.model.Partner;
-import hr.antikvarijat.model.NacinPlacanja;
-import hr.antikvarijat.model.ProdajaZaglavlje;
-import hr.antikvarijat.service.KnjigaService;
-import hr.antikvarijat.service.PartnerService;
-import hr.antikvarijat.service.NacinPlacanjaService;
-import hr.antikvarijat.service.ProdajaZaglavljeService;
+import hr.antikvarijat.service.*;
 import hr.antikvarijat.impl.UserServiceImpl;
 
 
@@ -22,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,14 +26,20 @@ import java.util.List;
 public class ProdajaZaglavljeController {
 
     private final ProdajaZaglavljeService prodajaZaglavljeService;
+
+    private final ProdajaStavkaService prodajaStavkaService;
+
+    private final KnjigaService knjigaService;
     private final PartnerService partnerService;
     private final NacinPlacanjaService nacinPlacanjaService;
     private final UserServiceImpl userService;
 
     @Autowired
-    public ProdajaZaglavljeController(ProdajaZaglavljeService prodajaZaglavljeService, PartnerService partnerService,
+    public ProdajaZaglavljeController(ProdajaZaglavljeService prodajaZaglavljeService, ProdajaStavkaService prodajaStavkaService, KnjigaService knjigaService, PartnerService partnerService,
                                       NacinPlacanjaService nacinPlacanjaService, UserServiceImpl userService) {
         this.prodajaZaglavljeService = prodajaZaglavljeService;
+        this.prodajaStavkaService = prodajaStavkaService;
+        this.knjigaService = knjigaService;
         this.partnerService = partnerService;
         this.nacinPlacanjaService = nacinPlacanjaService;
         this.userService = userService;
@@ -46,7 +48,10 @@ public class ProdajaZaglavljeController {
     @GetMapping("")
     public String showProdajaZaglavljeList(Model model) {
         List<ProdajaZaglavlje> listaProdajaZaglavlja = prodajaZaglavljeService.getAllProdajaZaglavlje();
+        List<ProdajaStavka> listaProdajaStavki = prodajaStavkaService.getAllProdajaStavke();
+
         model.addAttribute("listaProdajaZaglavlja", listaProdajaZaglavlja);
+        model.addAttribute("listaProdajaStavki", listaProdajaStavki);
         return "prodaja_zaglavlja";
     }
 
@@ -62,7 +67,14 @@ public class ProdajaZaglavljeController {
 
         prodajaZaglavlje.setDatumProdaje(danas);
 
-        List<Partner> listaPartnera = partnerService.getAllPartners();
+//        List<Partner> listaPartnera = partnerService.getAllPartners();
+        List<Partner> listaPartnera = new ArrayList<>();
+        Partner prazanPartner = new Partner(); // Kreiranje praznog objekta klase
+        listaPartnera.add(prazanPartner); // Dodavanje praznog objekta u listu
+        listaPartnera.addAll(partnerService.getSortedPartner());
+
+
+
         List<NacinPlacanja> listaNacinaPlacanja = nacinPlacanjaService.getAllNacinPlacanja();
 
         User user = userService.findByEmail("");
@@ -72,6 +84,22 @@ public class ProdajaZaglavljeController {
         model.addAttribute("nacinPlacanja", listaNacinaPlacanja);
 
         return "prodaja_zaglavlje_form";
+    }
+
+
+    @GetMapping("/new_stavka")
+    public String showFormStavka(Model model) {
+        try {
+            List<Knjiga> listaKnjiga = knjigaService.getSortedKnjiga();
+            ProdajaStavka prodajaStavka = new ProdajaStavka();
+            // Postavite potrebne atribute modela prema vašim potrebama
+            model.addAttribute("prodajaStavka", prodajaStavka);
+            model.addAttribute("knjiga", listaKnjiga);
+            return "prodaja_stavka_form";
+        } catch (ProdajaStavkaNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "prodaja_zaglavlja";
+        }
     }
 
     @PostMapping("/save")
@@ -85,6 +113,11 @@ public class ProdajaZaglavljeController {
             User user = userService.findByEmail(userDetails.getUsername());
             if (user != null) {
                 prodajaZaglavlje.setUser(user);
+
+                int id = prodajaZaglavlje.getPartner().getIdPartner();
+                if (id == 0){
+                    prodajaZaglavlje.setPartner(null);
+                }
                 prodajaZaglavljeService.saveProdajaZaglavlje(prodajaZaglavlje);
             } else {
                 System.out.println("Nije moguće pristupiti objektu klase User.");
@@ -100,7 +133,13 @@ public class ProdajaZaglavljeController {
         try {
             ProdajaZaglavlje prodajaZaglavlje = prodajaZaglavljeService.getProdajaZaglavljeById(idProdajaZaglavlje);
 
-            List<Partner> listaPartnera = partnerService.getAllPartners();
+//            List<Partner> listaPartnera = partnerService.getAllPartners();
+            List<Partner> listaPartnera = new ArrayList<>();
+            Partner prazanPartner = new Partner(); // Kreiranje praznog objekta klase
+            listaPartnera.add(prazanPartner); // Dodavanje praznog objekta u listu
+            listaPartnera.addAll(partnerService.getSortedPartner());
+
+
             List<NacinPlacanja> listaNacinaPlacanja = nacinPlacanjaService.getAllNacinPlacanja();
             List<UserDto> listaUserDTO = userService.findAllUsers();
 
@@ -114,6 +153,28 @@ public class ProdajaZaglavljeController {
             return "redirect:/prodaja_zaglavlja";
         }
     }
+
+    @GetMapping("/delete_stavka/{id}")
+    public String deleteProdajaStavka(@PathVariable("id") int id) {
+        prodajaStavkaService.deleteProdajaStavka(id);
+        return "redirect:/prodaja_zaglavlja";
+    }
+
+    @GetMapping("/edit_stavka/{id}")
+    public String showEditFormStavka(@PathVariable("id") int id, Model model) {
+        try {
+            List<Knjiga> listaKnjiga = knjigaService.getSortedKnjiga();
+            ProdajaStavka prodajaStavka = prodajaStavkaService.getProdajaStavkaById(id);
+            // Postavite potrebne atribute modela prema vašim potrebama
+            model.addAttribute("prodajaStavka", prodajaStavka);
+            model.addAttribute("knjiga", listaKnjiga);
+            return "prodaja_forma";
+        } catch (ProdajaStavkaNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "prodaja_zaglavlja";
+        }
+    }
+
 
     @GetMapping("/delete/{id}")
     public String deleteProdajaZaglavlje(@PathVariable int id) {

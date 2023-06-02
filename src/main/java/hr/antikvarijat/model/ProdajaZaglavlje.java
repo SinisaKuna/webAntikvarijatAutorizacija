@@ -19,7 +19,7 @@ public class ProdajaZaglavlje {
     @Column(name = "datum_prodaje")
     private Date datumProdaje;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn(name = "id_partner")
     private Partner partner;
 
