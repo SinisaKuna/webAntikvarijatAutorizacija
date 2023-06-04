@@ -117,6 +117,7 @@
 
             <!-- TABLICA -->
             <div class="col-xl-10 col-md-12 px-sm-2 px-0">
+
                 <div class="container">
 
                     <br>
@@ -164,9 +165,8 @@
                             <th>RN</th>
                             <th>Knjiga</th>
                             <th>Količina</th>
-                            <th>Jedinična cijena</th>
-                            <!--              <th>Ukupna cijena</th>-->
-
+                            <th>Cijena</th>
+                            <th>Iznos</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -174,11 +174,11 @@
                         <!-- Iteriranje kroz popis prodaja stavki -->
                         <tr th:each="prodajaStavka : ${listaProdajaStavki}">
                             <td th:text="${prodajaStavka.idProdajaStavka}"></td>
-<!--                            <td th:text="${prodajaStavka.prodajaZaglavlje.idProdajaZaglavlje}"></td>-->
                             <td th:text="${prodajaStavka.prodajaZaglavlje != null ? prodajaStavka.prodajaZaglavlje.idProdajaZaglavlje : ''}"></td>
                             <td th:text="@{${prodajaStavka.knjiga.nazivKnjige}}"></td>
                             <td th:text="${prodajaStavka.kolicina}"></td>
                             <td th:text="${prodajaStavka.cijenaProdaje}"></td>
+                            <td th:text="${prodajaStavka.cijenaProdaje * prodajaStavka.kolicina}"></td>
                             <td>
                                 <a th:href="@{/prodaja_stavke/edit/{id}(id=${prodajaStavka.idProdajaStavka})}">Uredi</a>
                                 <a th:href="@{/prodaja_stavke/delete/{id}(id=${prodajaStavka.idProdajaStavka})}"

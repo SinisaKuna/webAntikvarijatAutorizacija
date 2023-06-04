@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -96,6 +97,19 @@ public class ProdajaController {
         model.addAttribute("listaProdajaStavki", listaProdajaStavki);
         model.addAttribute("prodajaStavka", prodajaStavka);
         model.addAttribute("knjiga", listaKnjiga);
+
+        BigDecimal zbrojIznosa = BigDecimal.valueOf(0);
+        for (ProdajaStavka stavka : listaProdajaStavki) {
+            BigDecimal cijenaProdaje = stavka.getCijenaProdaje();
+            int kolicina = stavka.getKolicina();
+
+            BigDecimal kolicinaBigDecimal = BigDecimal.valueOf(kolicina);
+            BigDecimal iznosStavke = cijenaProdaje.multiply(kolicinaBigDecimal);
+
+            zbrojIznosa = zbrojIznosa.add(iznosStavke);
+
+        }
+        model.addAttribute("zbrojIznosa", zbrojIznosa);
 
         return "prodaja_stavke";
     }

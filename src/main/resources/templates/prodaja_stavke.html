@@ -12,7 +12,9 @@
           font-size: 14px;
         }
 
-
+  tfoot td {
+        font-weight: bold;
+    }
 
     .sidebar {
       background-color: #343a40;
@@ -134,19 +136,21 @@
                             <!--              <th>RN</th>-->
                             <th>Knjiga</th>
                             <th>Količina</th>
-                            <th>Jedinična cijena</th>
-                            <!--              <th>Ukupna cijena</th>-->
+                            <th>Cijena</th>
+                            <th>Iznos</th>
 
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- Iteriranje kroz popis prodaja stavki -->
-                        <tr th:each="prodajaStavka : ${listaProdajaStavki}">
-                            <td th:text="${prodajaStavka.idProdajaStavka}"></td>
+
+                        <tr th:each="prodajaStavka : ${listaProdajaStavki}" class="prodaja-stavka">
+                        <td th:text="${prodajaStavka.idProdajaStavka}"></td>
                             <td th:text="@{${prodajaStavka.knjiga.nazivKnjige}}"></td>
                             <td th:text="${prodajaStavka.kolicina}"></td>
                             <td th:text="${prodajaStavka.cijenaProdaje}"></td>
+                            <td th:text="${prodajaStavka.cijenaProdaje * prodajaStavka.kolicina}"></td>
+
                             <td>
                                 <a th:href="@{/prodaja_stavke/edit_stavka/{id}(id=${prodajaStavka.idProdajaStavka})}">Uredi</a>
                                 <a th:href="@{/prodaja_stavke/delete_stavka/{id}(id=${prodajaStavka.idProdajaStavka})}"
@@ -155,6 +159,16 @@
                             </td>
                         </tr>
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="4">Ukupno:</td>
+                            <td>
+                                <span th:text="${zbrojIznosa}"></span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        </tfoot>
+
                     </table>
                     <hr>
 
@@ -223,7 +237,8 @@
                         </div>
                         <form>
 
-                            <button type="submit" class="btn btn-primary">Spremi račun</button>
+<!--                            <button type="submit" class="btn btn-primary">Spremi račun</button>-->
+                            <button type="submit" class="btn btn-primary" onclick="return validateSaveRacun()">Spremi račun</button>
                             <button type="button" class="btn btn-secondary" onclick="cancelForm()">Odustani</button>
 
 
@@ -249,10 +264,8 @@
 
 <script type="text/javascript">
   function cancelForm() {
-<!--    window.location = "[[@{/prodaja_stavke}]]";-->
- window.location = "[[@{/}]]";
+  window.location = "[[@{/}]]";
   }
-
 </script>
 
 <script>
@@ -265,7 +278,7 @@
       alert("Morate odabrati knjigu.");
       return false; // Spriječi slanje forme
     }
-   if (kolicina === "" || kolicina === "0") {
+    if (kolicina === "" || kolicina === "0") {
       alert("Unesite ispravnu količinu.");
       return false; // Spriječi slanje forme
     }
@@ -278,14 +291,15 @@
     return true; // Dopusti slanje forme
   }
 
+  function validateSaveRacun() {
+    var stavke = document.getElementsByClassName("prodaja-stavka");
+    if (stavke.length === 0) {
+      alert("Morate upisati barem jednu stavku.");
+      return false; // Spriječi slanje forme
+    }
 
-
-
-
-
-
-
-
+    return true; // Dopusti slanje forme
+  }
 </script>
 
 
