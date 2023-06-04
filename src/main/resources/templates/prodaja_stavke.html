@@ -218,7 +218,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="idPartner">Partner:</label>
+                                <label for="idPartner">Kupac:</label>
                                 <select class="form-control" id="idPartner" th:field="*{partner.idPartner}">
                                     <option th:each="partner : ${partner}" th:value="${partner.idPartner}"
                                             th:text="${partner.nazivPartnera}"></option>
