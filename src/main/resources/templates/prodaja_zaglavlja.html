@@ -117,8 +117,10 @@
 
 
             <!-- TABLICA -->
-            <div class="col-xl-10 col-md-12 px-sm-2 px-0">
-
+<!--            <div class="col-xl-10 col-md-12 px-sm-2 px-0">-->
+<!--            <div class="px-sm-4">-->
+<!--            </div>-->
+            <div class="col-md-9">
                 <div class="container">
 
                     <br>
@@ -126,8 +128,6 @@
                     <hr>
                     <!-- Provjera poruke o grešci -->
                     <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
-<!--                    <a href="/prodaja_zaglavlja/new" class="btn btn-primary">Dodaj račun</a>-->
-<!--                    <table id="zaglavlje" class="table table-striped table-hover">-->
                     <table id="zaglavlje" class="table">
                         <thead>
                         <tr>
@@ -135,7 +135,6 @@
                             <th>Datum</th>
                             <th>Kupac</th>
                             <th>Nacin placanja</th>
-<!--                            <th>Operater</th>-->
                             <th></th>
                         </tr>
                         </thead>
@@ -146,8 +145,6 @@
                             <td th:text="${prodajaZaglavlje.datumProdaje}"></td>
                             <td th:text="${prodajaZaglavlje.partner != null ? prodajaZaglavlje.partner.nazivPartnera : ''}"></td>
                             <td th:text="${prodajaZaglavlje.nacinPlacanja != null ? prodajaZaglavlje.nacinPlacanja.nazivNacinaPlacanja : ''}"></td>
-<!--                            <td th:text="${prodajaZaglavlje.user.name}"></td>-->
-
 
                             <td>
                                 <a th:href="@{/prodaja_zaglavlja/edit/{id}(id=${prodajaZaglavlje.idProdajaZaglavlje})}">Uredi</a>
@@ -156,14 +153,10 @@
                                    onclick="return confirm('Jeste li sigurni da želite obrisati?') ? true : false">Obriši</a>
                             </td>
                             <td>
-
-                                <table id="stavke" class="table table-bordered">
+                                <table id="stavke" class="table table-borderless">
 <!--                                <table id="stavke" class="table">-->
-
                                     <thead>
                                     <tr>
-                                        <!--                                    <th>ID</th>-->
-                                        <!--                                    <th>RN</th>-->
                                         <th>Knjiga</th>
                                         <th>Količina</th>
                                         <th>Cijena</th>
@@ -173,12 +166,8 @@
                                     </thead>
                                     <tbody>
                                     <!-- Iteriranje kroz popis prodaja stavki -->
-                                    <!--                                <tr th:each="prodajaStavka : ${listaProdajaStavki}">-->
                                     <tr th:each="prodajaStavka : ${listaProdajaStavki}"
                                         th:if="${prodajaStavka.prodajaZaglavlje.idProdajaZaglavlje == prodajaZaglavlje.idProdajaZaglavlje}">
-
-<!--                                        <td th:text="${prodajaStavka.idProdajaStavka}"></td>-->
-<!--                                        <td th:text="${prodajaStavka.prodajaZaglavlje != null ? prodajaStavka.prodajaZaglavlje.idProdajaZaglavlje : ''}"></td>-->
                                         <td th:text="@{${prodajaStavka.knjiga.nazivKnjige}}"></td>
                                         <td th:text="${prodajaStavka.kolicina}"></td>
                                         <td th:text="${prodajaStavka.cijenaProdaje}"></td>
@@ -198,40 +187,6 @@
                         </tbody>
 
                     </table>
-
-                    <!--                    <a href="/prodaja_zaglavlja/new_stavka" class="btn btn-primary">Dodaj stavku</a>-->
-                    <!--                    <table class="table table-striped table-hover">-->
-                    <!--                        <thead>-->
-                    <!--                        <tr>-->
-                    <!--                            <th>ID</th>-->
-                    <!--                            <th>RN</th>-->
-                    <!--                            <th>Knjiga</th>-->
-                    <!--                            <th>Količina</th>-->
-                    <!--                            <th>Cijena</th>-->
-                    <!--                            <th>Iznos</th>-->
-                    <!--                            <th></th>-->
-                    <!--                        </tr>-->
-                    <!--                        </thead>-->
-                    <!--                        <tbody>-->
-                    <!--                        &lt;!&ndash; Iteriranje kroz popis prodaja stavki &ndash;&gt;-->
-                    <!--                        <tr th:each="prodajaStavka : ${listaProdajaStavki}">-->
-                    <!--                            <td th:text="${prodajaStavka.idProdajaStavka}"></td>-->
-                    <!--                            <td th:text="${prodajaStavka.prodajaZaglavlje != null ? prodajaStavka.prodajaZaglavlje.idProdajaZaglavlje : ''}"></td>-->
-                    <!--                            <td th:text="@{${prodajaStavka.knjiga.nazivKnjige}}"></td>-->
-                    <!--                            <td th:text="${prodajaStavka.kolicina}"></td>-->
-                    <!--                            <td th:text="${prodajaStavka.cijenaProdaje}"></td>-->
-                    <!--                            <td th:text="${prodajaStavka.cijenaProdaje * prodajaStavka.kolicina}"></td>-->
-                    <!--                            <td>-->
-                    <!--                                <a th:href="@{/prodaja_stavke/edit/{id}(id=${prodajaStavka.idProdajaStavka})}">Uredi</a>-->
-                    <!--                                <a th:href="@{/prodaja_stavke/delete/{id}(id=${prodajaStavka.idProdajaStavka})}"-->
-                    <!--                                   class="text-danger" style="margin-left: 10px;"-->
-                    <!--                                   onclick="return confirm('Jeste li sigurni da želite obrisati?') ? true : false">Obriši</a>-->
-                    <!--                            </td>-->
-                    <!--                        </tr>-->
-                    <!--                        </tbody>-->
-                    <!--                    </table>-->
-
-
                     <a href="/" class="btn btn-secondary">Povratak</a>
                 </div>
             </div>
