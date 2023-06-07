@@ -9,6 +9,9 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 public class AntikvarijatApplication {
 
 	public static void main(String[] args) {
+
+		System.setProperty("file.encoding", "UTF-8");
+
 		SpringApplication.run(AntikvarijatApplication.class, args);
 	}
 

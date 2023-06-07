@@ -8,14 +8,26 @@ import hr.antikvarijat.service.*;
 import hr.antikvarijat.impl.UserServiceImpl;
 
 
+import hr.antikvarijat.servis.PdfGenerator;
+import org.apache.pdfbox.io.IOUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -154,11 +166,88 @@ public class ProdajaZaglavljeController {
         }
     }
 
+
+//    @GetMapping("/pdf/{id}")
+//    public String pdfEditForm(@PathVariable("id") int idProdajaZaglavlje, Model model) {
+//        try {
+//
+//            PdfGenerator pdfGenerator = new PdfGenerator(prodajaZaglavljeService);
+//            pdfGenerator.generateInvoice(idProdajaZaglavlje);
+//
+//
+//            return "redirect:/prodaja_zaglavlja/view";
+//        } catch (ProdajaZaglavljeNotFoundException e) {
+//            return "redirect:/prodaja_zaglavlja";
+//        }
+//    }
+
+
+    @GetMapping("/pdf/{id}")
+    public void pdfEditForm(@PathVariable("id") int idProdajaZaglavlje, HttpServletResponse response) {
+        try {
+            PdfGenerator pdfGenerator = new PdfGenerator(prodajaZaglavljeService);
+            pdfGenerator.generateInvoice(idProdajaZaglavlje);
+
+            // Postavi odgovarajuće zaglavlje
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "inline; filename=prodaja.pdf");
+
+            // Učitaj generisani PDF dokument
+            File pdfFile = new File("pdf/prodaja.pdf");
+            FileInputStream fileInputStream = new FileInputStream(pdfFile);
+
+            // Kopiraj PDF sadržaj u odgovor
+            IOUtils.copy(fileInputStream, response.getOutputStream());
+
+            // Zatvori tokove
+            fileInputStream.close();
+            response.getOutputStream().flush();
+        } catch (IOException | ProdajaZaglavljeNotFoundException e) {
+            // Handlaj izuzetak
+        }
+    }
+
+
     @GetMapping("/delete_stavka/{id}")
     public String deleteProdajaStavka(@PathVariable("id") int id) {
         prodajaStavkaService.deleteProdajaStavka(id);
         return "redirect:/prodaja_zaglavlja";
     }
+
+
+//    @GetMapping("/view")
+//    public void viewPdf(HttpServletResponse response) throws IOException {
+//        String pdfPath = "pdf/prodaja.pdf";
+//        Path file = Paths.get(pdfPath);
+//
+//        if (Files.exists(file)) {
+//            response.setContentType("application/pdf");
+//            response.setHeader("Content-Disposition", "inline; filename=" + file.getFileName());
+//
+//            try (InputStream inputStream = new FileInputStream(pdfPath)) {
+//                StreamUtils.copy(inputStream, response.getOutputStream());
+//            }
+//        } else {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//        }
+//    }
+
+//    @GetMapping("/view")
+//    public void viewPdf(HttpServletResponse response) throws IOException {
+//        String pdfPath = "pdf/prodaja.pdf";
+//        Path file = Paths.get(pdfPath);
+//
+//        if (Files.exists(file)) {
+//            response.setContentType("application/pdf");
+//            response.setHeader("Content-Disposition", "inline; filename=" + file.getFileName());
+//
+//            try (InputStream inputStream = new FileInputStream(pdfPath)) {
+//                StreamUtils.copy(inputStream, response.getOutputStream());
+//            }
+//        } else {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//        }
+//    }
 
     @GetMapping("/edit_stavka/{id}")
     public String showEditFormStavka(@PathVariable("id") int id, Model model) {
