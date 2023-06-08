@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,10 +23,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -185,7 +180,7 @@ public class ProdajaZaglavljeController {
     @GetMapping("/pdf/{id}")
     public void pdfEditForm(@PathVariable("id") int idProdajaZaglavlje, HttpServletResponse response) {
         try {
-            PdfGenerator pdfGenerator = new PdfGenerator(prodajaZaglavljeService);
+            PdfGenerator pdfGenerator = new PdfGenerator(prodajaZaglavljeService, prodajaStavkaService);
             pdfGenerator.generateInvoice(idProdajaZaglavlje);
 
             // Postavi odgovarajuće zaglavlje

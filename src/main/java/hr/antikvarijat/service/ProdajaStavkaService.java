@@ -21,6 +21,10 @@ public class ProdajaStavkaService {
         return prodajaStavkaRepository.findAll();
     }
 
+    public List<ProdajaStavka> getProdajaStavkeZaRacun(int idProdajaZaglavlje) {
+        return prodajaStavkaRepository.findByProdajaZaglavljeIdProdajaZaglavlje(idProdajaZaglavlje);
+    }
+
     public ProdajaStavka getProdajaStavkaById(int id) {
         return prodajaStavkaRepository.findById(id)
                 .orElseThrow(() -> new ProdajaStavkaNotFoundException("Prodaja stavka s ID-em " + id + " nije pronađena."));
