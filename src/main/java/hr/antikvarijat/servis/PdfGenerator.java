@@ -163,10 +163,10 @@ public class PdfGenerator {
                     if (i == 1) {
 
                         if (j == 1) {
-                            int sirina = 150;
+                            int sirina = 100;
                             contentStream.addRect(initX, initY, cellWidth + sirina, -cellHeight);
                             contentStream.beginText();
-                            contentStream.newLineAtOffset(initX + 30, initY - cellHeight + 7);
+                            contentStream.newLineAtOffset(initX + 10, initY - cellHeight + 7);
                             contentStream.setFont(font, 10);
                             contentStream.showText("naziv knjige");
                             contentStream.endText();
@@ -175,7 +175,7 @@ public class PdfGenerator {
                         } else if (j == 2) {
                             contentStream.addRect(initX, initY, cellWidth, -cellHeight);
                             contentStream.beginText();
-                            contentStream.newLineAtOffset(initX + 10, initY - cellHeight + 7);
+                            contentStream.newLineAtOffset(initX + 15, initY - cellHeight + 7);
                             contentStream.setFont(font, 10);
                             contentStream.showText("količina");
                             contentStream.endText();
@@ -184,7 +184,7 @@ public class PdfGenerator {
                         } else if (j == 3) {
                             contentStream.addRect(initX, initY, cellWidth, -cellHeight);
                             contentStream.beginText();
-                            contentStream.newLineAtOffset(initX + 10, initY - cellHeight + 7);
+                            contentStream.newLineAtOffset(initX + 15, initY - cellHeight + 7);
                             contentStream.setFont(font, 10);
                             contentStream.showText("cijena");
                             contentStream.endText();
@@ -193,7 +193,7 @@ public class PdfGenerator {
                         } else if (j == 4) {
                             contentStream.addRect(initX, initY, cellWidth, -cellHeight);
                             contentStream.beginText();
-                            contentStream.newLineAtOffset(initX + 10, initY - cellHeight + 7);
+                            contentStream.newLineAtOffset(initX + 15, initY - cellHeight + 7);
                             contentStream.setFont(font, 10);
                             contentStream.showText("iznos");
                             contentStream.endText();
@@ -207,10 +207,10 @@ public class PdfGenerator {
                         ProdajaStavka prodajaStavka = listaProdajaStavki.get(i-2);
 
                         if (j == 1) {
-                            int sirina = 150;
+                            int sirina = 100;
                             contentStream.addRect(initX, initY, cellWidth + sirina, -cellHeight);
                             contentStream.beginText();
-                            contentStream.newLineAtOffset(initX + 30, initY - cellHeight + 7);
+                            contentStream.newLineAtOffset(initX + 10, initY - cellHeight + 7);
                             contentStream.setFont(font, 10);
                             contentStream.showText(prodajaStavka.getKnjiga().getNazivKnjige());
                             contentStream.endText();
@@ -219,7 +219,7 @@ public class PdfGenerator {
                         } else if (j == 2) {
                             contentStream.addRect(initX, initY, cellWidth, -cellHeight);
                             contentStream.beginText();
-                            contentStream.newLineAtOffset(initX + 10, initY - cellHeight + 7);
+                            contentStream.newLineAtOffset(initX + 30, initY - cellHeight + 7);
                             contentStream.setFont(font, 10);
                             contentStream.showText(String.valueOf(prodajaStavka.getKolicina()));
                             contentStream.endText();
@@ -228,7 +228,7 @@ public class PdfGenerator {
                         } else if (j == 3) {
                             contentStream.addRect(initX, initY, cellWidth, -cellHeight);
                             contentStream.beginText();
-                            contentStream.newLineAtOffset(initX + 10, initY - cellHeight + 7);
+                            contentStream.newLineAtOffset(initX + 20, initY - cellHeight + 7);
                             contentStream.setFont(font, 10);
                             contentStream.showText(String.valueOf(prodajaStavka.getCijenaProdaje()));
                             contentStream.endText();
@@ -237,7 +237,7 @@ public class PdfGenerator {
                         } else if (j == 4) {
                             contentStream.addRect(initX, initY, cellWidth, -cellHeight);
                             contentStream.beginText();
-                            contentStream.newLineAtOffset(initX + 10, initY - cellHeight + 7);
+                            contentStream.newLineAtOffset(initX + 15, initY - cellHeight + 7);
                             contentStream.setFont(font, 10);
                             BigDecimal cijenaProdaje = prodajaStavka.getCijenaProdaje();
                             int kolicina = prodajaStavka.getKolicina();
