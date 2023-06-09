@@ -379,9 +379,9 @@ public class PdfGenerator {
 
 
                 String file_path = "dat/pdf417.png";
-                createPDf417(tekst, file_path, charset, hashMap, 100, 200);
+                createPDf417(tekst, file_path, charset, hashMap, 100, 220);
                 PDImageXObject pdf417CodeImage = LosslessFactory.createFromImage(document, loadImage(file_path));
-                contentStream.drawImage(pdf417CodeImage, 350, y, 200, 100);
+                contentStream.drawImage(pdf417CodeImage, 350, y, 220, 100);
 
             }
 
