@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static hr.antikvarijat.servis.QRCodeGenerator.createPDf417;
 import static hr.antikvarijat.servis.QRCodeGenerator.createQR;
@@ -344,7 +345,7 @@ public class PdfGenerator {
 
             // 2d barCode
 
-            if (prodajaZaglavlje.getPartner() != null) {
+            if (prodajaZaglavlje.getPartner() != null && Objects.equals(prodajaZaglavlje.getNacinPlacanja().getNazivNacinaPlacanja().toLowerCase(), "virman")) {
 
 
                 BigInteger cijeliDio = zbrojIznosa.toBigInteger();
