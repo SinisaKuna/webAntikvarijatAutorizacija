@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import static hr.antikvarijat.servis.IMDbScraper.findMovieWithTitle;
 import static hr.antikvarijat.servis.PickboxScraper.UpisiProgram;
 
 @Controller
@@ -30,9 +31,10 @@ public class PickboxController {
     }
 
     @RequestMapping("/pickbox/puni")
-    public String puniPickboxTable(Model model) throws IOException {
+    public String puniPickboxTable(Model model, RedirectAttributes ra) throws IOException {
         pickboxRepository.deleteAll();
         UpisiProgram(pickboxService);
+        ra.addFlashAttribute("message", "Podaci su obnovljeni...");
         return "redirect:/pickbox";
     }
 
@@ -45,9 +47,24 @@ public class PickboxController {
     }
 
     @RequestMapping("/pickbox/imdb/{id}")
-    public String imdbPickboxTable(@PathVariable("id") int idPickBox, Model model, RedirectAttributes ra) {
+    public String imdbPickboxTable(@PathVariable("id") int idPickBox, Model model, RedirectAttributes ra) throws IOException {
         Optional<Pickbox> pickbox = pickboxService.getPickboxById(idPickBox);
-        ra.addFlashAttribute("message", "Izrada prikaza IMDB stranice u tijeku...");
-        return "redirect:/pickbox";
+        String naslov = pickbox.get().getNaziv();
+        String input = naslov;
+        String[] parts = input.split("\\|"); // Razdvajanje stringa na temelju znaka "|"
+        String result = parts[0].trim(); // Dobivanje prvog dijela i uklanjanje nepotrebnih razmaka
+        String prijevod = pickbox.get().getPrijevod();
+        String imdbUrl = "https://www.imdb.com/";
+        String searchUrl = imdbUrl + "find?q=" + naslov.replace(" ", "+") + "&s=tt&exact=true&ref_=fn_tt_ex";
+        String stranica = "";
+        String ttImdb = findMovieWithTitle(result);
+        if (ttImdb == null){
+            stranica = "error404";
+            ra.addFlashAttribute("message", "Nisam u mogućnosti pronaći Imdb stranicu za naslov " + naslov);
+        } else {
+            String imdbLink = "https://www.imdb.com/title/"+ ttImdb+ "/";
+            stranica = "redirect:" + imdbLink;
+        }
+        return stranica;
     }
 }

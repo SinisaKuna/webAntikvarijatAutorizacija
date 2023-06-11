@@ -16,7 +16,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class PickboxSqlScraper {
+public class PickboxSqLiteScraper {
     private static final String URL = "https://www.pickbox.hr/tv/raspored/";
     private static final String DATABASE_NAME = "pickbox.db";
     private static Connection connection;
