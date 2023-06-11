@@ -40,6 +40,7 @@
 
 
 
+
     </style>
 </head>
 <body>
@@ -105,12 +106,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/prodaja_zaglavlja">Prodaja</a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="/otkup">Otkup</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="/rezervacija">Rezervacija</a>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                            <a class="nav-link" href="/otkup">Otkup</a>-->
+                        <!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                            <a class="nav-link" href="/rezervacija">Rezervacija</a>-->
+                        <!--                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="/prodaja">POS Terminal</a>
                         </li>
@@ -122,56 +123,54 @@
             </div>
 
             <!-- TABLICA -->
-            <!--            <div class="col-xl-11 col-md-10 col-sm-10">-->
-            <!--            <div class="col-sm-1">-->
-            <!--            </div>-->
-            <!--            <div class="col-md-10">-->
-            <!--            <div class="col-md-10 col-xl-10">-->
-<!--            <div class="col-xl-10 col-md-12 px-sm-2 px-0">-->
-
-<!--                <div class="px-sm-2">-->
-<!--                </div>-->
-                <div class="col-md-10">
+            <div class="col-md-10">
 
 
-                    <div class="container">
-                        <br>
-                        <h4 th:text="${naslov}">Popis podataka</h4>
-                        <hr>
-                        <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <a th:href="@{${dodajLink}}" class="btn btn-primary">Dodaj</a>
-                            </div>
+                <div class="container">
+                    <br>
+                    <h4 th:text="${naslov}">Popis podataka</h4>
+                    <hr>
+                    <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a th:href="@{${puniLink}}" class="btn btn-primary">Obnovi program</a>
                         </div>
-                        <div class="table-responsive">
-                            <br>
-                            <!--                        <table id="myTable" class="table table-striped table-hover" data-locale="hr-HR" width="100%">-->
-                            <table id="myTable" class="table table-striped table-hover" data-locale="hr-HR">
-                                <thead>
-                                <tr>
-                                    <th th:each="kolona : ${listeKolona}" th:text="${kolona.naziv}"></th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="podatak : ${listaPodataka}">
-                                    <td th:each="kolona : ${listeKolona}" th:text="${podatak[kolona.polje]}"></td>
-                                    <td>
-                                        <a th:href="@{${urediLink}(id=${podatak[listeKolona[0].id]})}">Uredi</a>
-                                        <a th:href="@{${obrisiLink}(id=${podatak[listeKolona[0].id]})}"
-                                           class="text-danger"
-                                           onclick="return confirm('Jeste li sigurni da želite obrisati?') ? true : false">Obriši</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <a href="/" class="btn btn-secondary">Povratak</a>
                     </div>
-
+                    <div class="table-responsive">
+                        <br>
+                        <table id="myTable" class="table table-striped table-hover" data-locale="hr-HR">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Datum</th>
+                                <th>Dan</th>
+                                <th>Vrsta</th>
+                                <th>Vrijeme</th>
+                                <th>Naziv</th>
+                                <th>Prijevod</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="pickbox : ${pickboxList}">
+                                <td th:text="${pickbox.id}"></td>
+                                <td th:text="${pickbox.datum}"></td>
+                                <td th:text="${pickbox.dan}"></td>
+                                <td th:text="${pickbox.vrsta}"></td>
+                                <td th:text="${pickbox.vrijeme}"></td>
+                                <td th:text="${pickbox.naziv}"></td>
+                                <td th:text="${pickbox.prijevod}"></td>
+                                <td>
+                                    <a th:href="@{/pickbox/imdb/{id}(id=${pickbox.id})}">IMDB</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="/" class="btn btn-secondary">Povratak</a>
                 </div>
-<!--            </div>-->
+
+            </div>
         </div>
     </div>
 
@@ -198,7 +197,7 @@
 $(document).ready(function() {
     $('#myTable').DataTable( {
         "language": {
-            "lengthMenu": "Prikaži _MENU_ zapisa po stranici",
+            "lengthMenu": "Prikaži  _MENU_  zapisa po stranici",
             "zeroRecords": "Nema pronađenih zapisa",
             "info": "Stranica _PAGE_ od _PAGES_",
             "infoEmpty": "Nema dostupnih zapisa",
@@ -216,6 +215,7 @@ $(document).ready(function() {
         }
     } );
 } );
+
 
 
 
