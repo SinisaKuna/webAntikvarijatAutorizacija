@@ -59,8 +59,15 @@ public class PickboxController {
         String stranica = "";
         String ttImdb = findMovieWithTitle(result);
         if (ttImdb == null){
-            stranica = "error404";
-            ra.addFlashAttribute("message", "Nisam u mogućnosti pronaći Imdb stranicu za naslov " + naslov);
+            searchUrl = imdbUrl + "find?q=" + prijevod.replace(" ", "+") + "&s=tt&exact=true&ref_=fn_tt_ex";
+            ttImdb = findMovieWithTitle(result);
+            if (ttImdb == null) {
+                stranica = "error404";
+                ra.addFlashAttribute("message", "Nisam u mogućnosti pronaći Imdb stranicu za naslov " + naslov);
+            } else {
+                String imdbLink = "https://www.imdb.com/title/"+ ttImdb+ "/";
+                stranica = "redirect:" + imdbLink;
+            }
         } else {
             String imdbLink = "https://www.imdb.com/title/"+ ttImdb+ "/";
             stranica = "redirect:" + imdbLink;
