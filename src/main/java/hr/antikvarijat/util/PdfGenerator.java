@@ -1,4 +1,4 @@
-package hr.antikvarijat.servis;
+package hr.antikvarijat.util;
 
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -7,6 +7,7 @@ import hr.antikvarijat.model.ProdajaStavka;
 import hr.antikvarijat.model.ProdajaZaglavlje;
 import hr.antikvarijat.service.ProdajaStavkaService;
 import hr.antikvarijat.service.ProdajaZaglavljeService;
+import hr.antikvarijat.servis.QRCodeGenerator;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;

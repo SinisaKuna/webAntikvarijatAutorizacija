@@ -60,10 +60,46 @@ public class QRCodeGenerator {
 
         // The data that the QR code will contain
 //        String data = "https://www.betastudio.hr/";
-        String data = "www.betastudio.hr šđčžćŠĐČĆŽ eto ga";
+        String data = "\n" +
+                "Ohridski čomlek\n" +
+                "===============\n" +
+                "\n" +
+                "\n" +
+                "Sastojci:\n" +
+                "---------\n" +
+                "\n" +
+                "70 dkg junećeg mesa\n" +
+                "50 dkg sitnog luka\n" +
+                "glavica češnjaka\n" +
+                "tučena crvena paprika\n" +
+                "1 dl crnog vina\n" +
+                "10 dkg maslaca\n" +
+                "peršin\n" +
+                "lovorov list\n" +
+                "sol\n" +
+                "papar\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Priprema:\n" +
+                "---------\n" +
+                "\n" +
+                "Izrežite meso na manje kocke. \n" +
+                "Očistite luk i češnjak, a peršin sitno nasjeckajte. \n" +
+                "U dublju zemljanu posudu stavite sve sastojke, \n" +
+                "začinite i sve dobro promiješajte. \n" +
+                "\n" +
+                "Na kraju zalijte vinom i odozgo poslažite \n" +
+                "listiće maslaca. \n" +
+                "\n" +
+                "Od malo brašna i vode napravite tijesto koje ćete \n" +
+                "zalijepiti na rub posude i poklopca da bolje dihta.\n" +
+                "\n" +
+                "Poklopite posudu i lagano kuhajte jelo na \n" +
+                "tihoj vatri par sati. x";
 
         // The path where the image will get saved
-        String path = "dat/beta_studio.png";
+        String path = "dat/recept3.png";
 
         // Encoding charset
         String charset = "utf-8";

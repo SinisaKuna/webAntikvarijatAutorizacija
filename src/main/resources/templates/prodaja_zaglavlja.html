@@ -151,7 +151,7 @@
 
                             <td>
                                 <a th:href="@{/prodaja_zaglavlja/edit/{id}(id=${prodajaZaglavlje.idProdajaZaglavlje})}">Uredi</a>
-                                <a th:href="@{/prodaja_zaglavlja/pdf/{id}(id=${prodajaZaglavlje.idProdajaZaglavlje})}">Pdf</a>
+                                <a th:href="@{/prodaja_zaglavlja/pdf/{id}(id=${prodajaZaglavlje.idProdajaZaglavlje})}" target="_blank">Pdf</a>
                                 <a th:href="@{/prodaja_zaglavlja/delete/{id}(id=${prodajaZaglavlje.idProdajaZaglavlje})}"
                                    class="text-danger"
                                    onclick="return confirm('Jeste li sigurni da želite obrisati?') ? true : false">Obriši</a>

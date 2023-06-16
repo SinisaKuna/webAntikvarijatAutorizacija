@@ -1,6 +1,5 @@
 package hr.antikvarijat.controller;
 
-import hr.antikvarijat.model.Grad;
 import hr.antikvarijat.model.Pickbox;
 import hr.antikvarijat.repository.PickboxRepository;
 import hr.antikvarijat.service.PickboxService;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static hr.antikvarijat.servis.IMDbScraper.findMovieWithTitle;
-import static hr.antikvarijat.servis.PickboxScraper.UpisiProgram;
+import static hr.antikvarijat.util.PickboxScraper.UpisiProgram;
 
 @Controller
 public class PickboxController {

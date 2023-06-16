@@ -8,7 +8,7 @@ import hr.antikvarijat.service.*;
 import hr.antikvarijat.impl.UserServiceImpl;
 
 
-import hr.antikvarijat.servis.PdfGenerator;
+import hr.antikvarijat.util.PdfGenerator;
 import org.apache.pdfbox.io.IOUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

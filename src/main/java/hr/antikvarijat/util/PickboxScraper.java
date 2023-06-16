@@ -1,4 +1,4 @@
-package hr.antikvarijat.servis;
+package hr.antikvarijat.util;
 
 
 import java.io.IOException;
